@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageVersion>0.0.1</PackageVersion>
+    <Authors>Mutuduxf</Authors>
+    <Company>Mutuduxf</Company>
+    <PackageTags>Zaaby DDD</PackageTags>
+    <Description>DDD framework for Zaaby.</Description>
+    <PackageProjectUrl>https://github.com/Mutuduxf/Zaaby.DDD</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Mutuduxf/Zaaby.DDD/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Zaaby.Core" Version="0.3.2018060501" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.0.2" />
+  </ItemGroup>
+</Project>
