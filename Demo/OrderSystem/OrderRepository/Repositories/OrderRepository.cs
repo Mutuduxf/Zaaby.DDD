@@ -4,37 +4,37 @@ using System.Linq;
 using OrderDomain.AggregateRoots;
 using OrderDomain.IRepository;
 using OrderRepository.PersistentObjects;
-using Zaabee.Mongo.Core;
+using Zaabee.Mongo.Abstractions;
 using Zaabee.Redis.Abstractions;
 
 namespace OrderRepository.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly IMongoDbRepository _mongoDbRepository;
+        private readonly IZaabeeMongoClient _mongoClient;
         private readonly IZaabeeRedisClient _cache;
 
-        public OrderRepository(IMongoDbRepository mongoDbRepository,IZaabeeRedisClient cache)
+        public OrderRepository(IZaabeeMongoClient mongoClient,IZaabeeRedisClient cache)
         {
-            _mongoDbRepository = mongoDbRepository;
+            _mongoClient = mongoClient;
             _cache = cache;
         }
 
         public void Add(Order order)
         {
-            _mongoDbRepository.Add(Convert(order));
+            _mongoClient.Add(Convert(order));
             _cache.Add(order.Id, order);
         }
 
         public void Add(List<Order> orders)
         {
-            _mongoDbRepository.AddRange(Convert(orders));
+            _mongoClient.AddRange(Convert(orders));
             _cache.AddRange(orders.Select(order => new Tuple<string, Order>(order.Id, order)).ToList());
         }
 
         public bool Delete(Order order)
         {
-            var result = _mongoDbRepository.Delete(Convert(order)) > 0;
+            var result = _mongoClient.Delete(Convert(order)) > 0;
             _cache.Delete(order.Id);
             return result;
         }
@@ -42,14 +42,14 @@ namespace OrderRepository.Repositories
         public int Delete(List<Order> orders)
         {
             var ids = orders.Select(p => p.Id).ToList();
-            var result = (int) _mongoDbRepository.Delete<OrderParentPo>(p => ids.Contains(p.Id));
+            var result = (int) _mongoClient.Delete<OrderParentPo>(p => ids.Contains(p.Id));
             _cache.DeleteAll(ids);
             return result;
         }
 
         public bool Modify(Order order)
         {
-            var result = _mongoDbRepository.Update(Convert(order)) > 0;
+            var result = _mongoClient.Update(Convert(order)) > 0;
             _cache.Add(order.Id, order);
             return result;
         }
@@ -58,7 +58,7 @@ namespace OrderRepository.Repositories
         {
             var pos = Convert(orders);
             var result = 0;
-            pos.ForEach(po => result += (int) _mongoDbRepository.Update(po));
+            pos.ForEach(po => result += (int) _mongoClient.Update(po));
             _cache.AddRange(orders.Select(order => new Tuple<string, Order>(order.Id, order)).ToList());
             return result;
         }
@@ -67,7 +67,7 @@ namespace OrderRepository.Repositories
         {
             var order = _cache.Get<Order>(id);
             if (order != null) return order;
-            order = Convert(_mongoDbRepository.GetQueryable<OrderParentPo>().FirstOrDefault(p => p.Id == id));
+            order = Convert(_mongoClient.GetQueryable<OrderParentPo>().FirstOrDefault(p => p.Id == id));
             _cache.Add(order.Id, order);
             return order;
         }
@@ -79,7 +79,7 @@ namespace OrderRepository.Repositories
             if (orders.Count >= ids.Count) return result;
 
             var notFoundIds = ids.Where(id => !orders.ContainsKey(id)).ToList();
-            var mongoOrders = Convert(_mongoDbRepository.GetQueryable<OrderParentPo>()
+            var mongoOrders = Convert(_mongoClient.GetQueryable<OrderParentPo>()
                 .Where(p => notFoundIds.Contains(p.Id)).ToList());
             if (mongoOrders.Count > 0)
                 _cache.AddRange(mongoOrders.Select(order => new Tuple<string, Order>(order.Id, order)).ToList());
@@ -90,7 +90,7 @@ namespace OrderRepository.Repositories
 
         public List<Order> GetAll()
         {
-            return Convert(_mongoDbRepository.GetQueryable<OrderParentPo>().ToList());
+            return Convert(_mongoClient.GetQueryable<OrderParentPo>().ToList());
         }
 
         public List<Order> GetValidOrders()

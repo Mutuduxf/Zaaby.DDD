@@ -8,6 +8,7 @@ using Zaabee.RabbitMQ;
 using Zaabee.Redis;
 using Zaaby;
 using Zaaby.Client;
+using Zaaby.DDD;
 using Zaaby.DDD.Abstractions.Application;
 
 namespace FinanceHost
@@ -32,6 +33,7 @@ namespace FinanceHost
             ZaabyServer.GetInstance()
                 .UseZaabyClient(appServiceConfig)
                 .UseZaabyServer<IApplicationService>()
+                .UseDDD()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
 //                .AddSingleton<IEventBus, ZaabyRabbitMqClient>(p =>
 //                    new ZaabyRabbitMqClient(rabbitmqConfig, new Serializer()))

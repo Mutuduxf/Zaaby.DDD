@@ -9,6 +9,7 @@ using Zaabee.Redis;
 using Zaaby;
 using Zaaby.Client;
 using Zaaby.DDD;
+using Zaaby.DDD.Abstractions.Application;
 
 namespace OrderHost
 {
@@ -31,6 +32,7 @@ namespace OrderHost
 
             ZaabyServer.GetInstance()
                 .UseZaabyClient(appServiceConfig)
+                .UseZaabyServer<IApplicationService>()
                 .UseDDD()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
 //                .AddSingleton<IEventBus, ZaabyRabbitMqClient>(p =>
