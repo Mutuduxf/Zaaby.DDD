@@ -5,16 +5,16 @@ using OrderDomain.AggregateRoots;
 using OrderDomain.IRepository;
 using OrderRepository.PersistentObjects;
 using Zaabee.Mongo.Core;
-using Zaaby.Core.Infrastructure.Cache;
+using Zaabee.Redis.Abstractions;
 
 namespace OrderRepository.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
         private readonly IMongoDbRepository _mongoDbRepository;
-        private readonly ICache _cache;
+        private readonly IZaabeeRedisClient _cache;
 
-        public OrderRepository(IMongoDbRepository mongoDbRepository,ICache cache)
+        public OrderRepository(IMongoDbRepository mongoDbRepository,IZaabeeRedisClient cache)
         {
             _mongoDbRepository = mongoDbRepository;
             _cache = cache;

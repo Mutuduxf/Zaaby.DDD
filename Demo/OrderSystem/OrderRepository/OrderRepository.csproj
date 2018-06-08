@@ -7,5 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Zaabee.Mongo.Core" Version="1.0.0" />
+    <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.0.0" />
   </ItemGroup>
 </Project>

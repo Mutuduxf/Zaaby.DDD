@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OrderDomain.AggregateRoots;
-using Zaaby.Core.Infrastructure.Repository;
+using Zaaby.DDD.Abstractions.Infrastructure.Repository;
 
 namespace OrderDomain.IRepository
 {

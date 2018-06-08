@@ -1,4 +1,4 @@
-﻿using Zaaby.Core.Domain;
+﻿using Zaaby.DDD.Abstractions.Domain;
 
 namespace FinanceDomain.AggregateRoots
 {

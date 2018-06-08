@@ -1,5 +1,5 @@
 ﻿using System;
-using Zaaby.Core.Domain;
+using Zaaby.DDD.Abstractions.Domain;
 
 namespace OrderDomain.AggregateRoots
 {

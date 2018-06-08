@@ -1,6 +1,6 @@
 ﻿using IFinanceApplication.DTOs;
 using System;
-using Zaaby.Core.Application;
+using Zaaby.DDD.Abstractions.Application;
 
 namespace IFinanceApplication
 {

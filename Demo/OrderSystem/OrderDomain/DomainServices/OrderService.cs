@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OrderDomain.IRepository;
-using Zaaby.Core.Domain;
+using Zaaby.DDD.Abstractions.Domain;
 
 namespace OrderDomain.DomainServices
 {

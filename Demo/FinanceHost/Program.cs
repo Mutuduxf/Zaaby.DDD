@@ -2,13 +2,13 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Zaabee.Mongo;
+using Zaabee.Mongo.Abstractions;
 using Zaabee.Mongo.Common;
-using Zaabee.Mongo.Core;
+using Zaabee.RabbitMQ;
+using Zaabee.Redis;
 using Zaaby;
 using Zaaby.Client;
-using Zaaby.Cache.RedisProvider;
 using Zaaby.DDD.Abstractions.Application;
-using Zaaby.MessageBus.RabbitMqProvider;
 
 namespace FinanceHost
 {
@@ -32,7 +32,7 @@ namespace FinanceHost
             ZaabyServer.GetInstance()
                 .UseZaabyClient(appServiceConfig)
                 .UseZaabyServer<IApplicationService>()
-                .AddSingleton<IMongoDbRepository>(p => new MongoDbRepository(mongoConfig))
+                .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
 //                .AddSingleton<IEventBus, ZaabyRabbitMqClient>(p =>
 //                    new ZaabyRabbitMqClient(rabbitmqConfig, new Serializer()))
 //                .AddSingleton<ICache, ZaabyRedisClient>(p =>

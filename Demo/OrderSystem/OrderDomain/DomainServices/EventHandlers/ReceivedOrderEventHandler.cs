@@ -1,6 +1,6 @@
 ﻿using OrderDomain.DomainEvents;
-using Zaaby.Core.Domain;
-using Zaaby.Core.Infrastructure.EventBus;
+using Zaaby.DDD.Abstractions.Domain;
+using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace OrderDomain.DomainServices.EventHandlers
 {

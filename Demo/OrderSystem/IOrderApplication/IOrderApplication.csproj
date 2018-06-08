@@ -3,6 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Zaaby.Core" Version="0.3.2018052801" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.0.2" />
   </ItemGroup>
 </Project>

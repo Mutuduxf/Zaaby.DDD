@@ -1,5 +1,5 @@
 ﻿using IShippingApplication.DTOs;
-using Zaaby.Core.Application;
+using Zaaby.DDD.Abstractions.Application;
 
 namespace IShippingApplication
 {

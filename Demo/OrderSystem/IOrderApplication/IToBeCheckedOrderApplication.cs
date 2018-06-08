@@ -1,4 +1,4 @@
-﻿using Zaaby.Core.Application;
+﻿using Zaaby.DDD.Abstractions.Application;
 
 namespace IOrderApplication
 {

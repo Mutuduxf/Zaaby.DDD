@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using OrderDomain.Entities;
 using OrderDomain.ValueObjects;
-using Zaaby.Core.Domain;
+
+using Zaaby.DDD.Abstractions.Domain;
 
 namespace OrderDomain.AggregateRoots
 {

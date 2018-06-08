@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Zaaby.Core;
+using Zaaby.Abstractions;
 using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.Abstractions.Domain;
 using Zaaby.DDD.Abstractions.Infrastructure.Repository;
