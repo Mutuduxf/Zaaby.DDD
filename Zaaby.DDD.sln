@@ -3,49 +3,49 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaaby.DDD.Abstractions", "Zaaby.DDD.Abstractions\Zaaby.DDD.Abstractions.csproj", "{9E750F70-1A46-4173-A97D-938B331F6000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zaaby.DDD.Abstractions", "Zaaby.DDD.Abstractions\Zaaby.DDD.Abstractions.csproj", "{9E750F70-1A46-4173-A97D-938B331F6000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaaby.DDD", "Zaaby.DDD\Zaaby.DDD.csproj", "{D2CF296B-B630-4AF7-8892-72E81956D7D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zaaby.DDD", "Zaaby.DDD\Zaaby.DDD.csproj", "{D2CF296B-B630-4AF7-8892-72E81956D7D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{AE9993CB-9EC2-424A-BE72-C37BC4C5FDF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHost", "Demo\FinanceHost\FinanceHost.csproj", "{744BF289-090A-4DC2-AD30-6DF432F5208D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceHost", "Demo\FinanceHost\FinanceHost.csproj", "{744BF289-090A-4DC2-AD30-6DF432F5208D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingHost", "Demo\ShippingHost\ShippingHost.csproj", "{02C0085E-5A3D-47E4-A26E-CA2A61747341}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingHost", "Demo\ShippingHost\ShippingHost.csproj", "{02C0085E-5A3D-47E4-A26E-CA2A61747341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoWeb", "Demo\DemoWeb\DemoWeb.csproj", "{74FD796A-7206-447F-B4D9-ABD93C13B031}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoWeb", "Demo\DemoWeb\DemoWeb.csproj", "{74FD796A-7206-447F-B4D9-ABD93C13B031}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinanceSystem", "FinanceSystem", "{62749CCF-8051-45B4-A698-CE7C9D1DDA6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceApplication", "Demo\FinanceSystem\FinanceApplication\FinanceApplication.csproj", "{84C49F89-D390-404A-B228-E9203804E13D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceApplication", "Demo\FinanceSystem\FinanceApplication\FinanceApplication.csproj", "{84C49F89-D390-404A-B228-E9203804E13D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDomain", "Demo\FinanceSystem\FinanceDomain\FinanceDomain.csproj", "{90017536-E440-4B04-80DC-DC632AB09B6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceDomain", "Demo\FinanceSystem\FinanceDomain\FinanceDomain.csproj", "{90017536-E440-4B04-80DC-DC632AB09B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceRepository", "Demo\FinanceSystem\FinanceRepository\FinanceRepository.csproj", "{4D49DB28-70AE-4E17-87DC-09ECF8E01434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceRepository", "Demo\FinanceSystem\FinanceRepository\FinanceRepository.csproj", "{4D49DB28-70AE-4E17-87DC-09ECF8E01434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IFinanceApplication", "Demo\FinanceSystem\IFinanceApplication\IFinanceApplication.csproj", "{5BC4FB3E-8D5B-4F5C-B9B3-569EA85854DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IFinanceApplication", "Demo\FinanceSystem\IFinanceApplication\IFinanceApplication.csproj", "{5BC4FB3E-8D5B-4F5C-B9B3-569EA85854DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderSystem", "OrderSystem", "{A0DFD2D5-91D9-4CBB-9772-D7977CF38151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOrderApplication", "Demo\OrderSystem\IOrderApplication\IOrderApplication.csproj", "{450D5950-91CA-4D5C-BE89-B429F069D6C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOrderApplication", "Demo\OrderSystem\IOrderApplication\IOrderApplication.csproj", "{450D5950-91CA-4D5C-BE89-B429F069D6C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApplication", "Demo\OrderSystem\OrderApplication\OrderApplication.csproj", "{2E5447FA-0E09-4815-94D5-D63EA53AB593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApplication", "Demo\OrderSystem\OrderApplication\OrderApplication.csproj", "{2E5447FA-0E09-4815-94D5-D63EA53AB593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDomain", "Demo\OrderSystem\OrderDomain\OrderDomain.csproj", "{027FD800-94F5-434A-9325-10612067F3E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDomain", "Demo\OrderSystem\OrderDomain\OrderDomain.csproj", "{027FD800-94F5-434A-9325-10612067F3E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderRepository", "Demo\OrderSystem\OrderRepository\OrderRepository.csproj", "{783D7185-2F16-4ADF-9BE5-609653567991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderRepository", "Demo\OrderSystem\OrderRepository\OrderRepository.csproj", "{783D7185-2F16-4ADF-9BE5-609653567991}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShippingSystem", "ShippingSystem", "{A18379FE-650C-4186-B139-3C772BD4E919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IShippingApplication", "Demo\ShippingSystem\IShippingApplication\IShippingApplication.csproj", "{57936412-FBDF-4F1B-A46E-C2E8E7B543CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IShippingApplication", "Demo\ShippingSystem\IShippingApplication\IShippingApplication.csproj", "{57936412-FBDF-4F1B-A46E-C2E8E7B543CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingApplication", "Demo\ShippingSystem\ShippingApplication\ShippingApplication.csproj", "{F5921586-BE8F-42A9-852B-5B900A9780FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingApplication", "Demo\ShippingSystem\ShippingApplication\ShippingApplication.csproj", "{F5921586-BE8F-42A9-852B-5B900A9780FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingDomain", "Demo\ShippingSystem\ShippingDomain\ShippingDomain.csproj", "{6761398C-36A7-40D0-B88A-895266AA2CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingDomain", "Demo\ShippingSystem\ShippingDomain\ShippingDomain.csproj", "{6761398C-36A7-40D0-B88A-895266AA2CC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingRepository", "Demo\ShippingSystem\ShippingRepository\ShippingRepository.csproj", "{8C37A643-7F55-45A0-9093-43F464857A64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingRepository", "Demo\ShippingSystem\ShippingRepository\ShippingRepository.csproj", "{8C37A643-7F55-45A0-9093-43F464857A64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderHost", "Demo\OrderHost\OrderHost.csproj", "{F634C854-DE68-433D-B1EC-BD2150C2C523}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderHost", "Demo\OrderHost\OrderHost.csproj", "{3CCE8377-0014-4BE8-BD8A-7CD7A8C9ACA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,16 +121,13 @@ Global
 		{8C37A643-7F55-45A0-9093-43F464857A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C37A643-7F55-45A0-9093-43F464857A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C37A643-7F55-45A0-9093-43F464857A64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F634C854-DE68-433D-B1EC-BD2150C2C523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F634C854-DE68-433D-B1EC-BD2150C2C523}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F634C854-DE68-433D-B1EC-BD2150C2C523}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F634C854-DE68-433D-B1EC-BD2150C2C523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCE8377-0014-4BE8-BD8A-7CD7A8C9ACA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CCE8377-0014-4BE8-BD8A-7CD7A8C9ACA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CCE8377-0014-4BE8-BD8A-7CD7A8C9ACA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CCE8377-0014-4BE8-BD8A-7CD7A8C9ACA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0DA2BF26-9A27-4144-A691-BD8B8DEF3BBF}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{744BF289-090A-4DC2-AD30-6DF432F5208D} = {AE9993CB-9EC2-424A-BE72-C37BC4C5FDF5}
@@ -151,6 +148,9 @@ Global
 		{F5921586-BE8F-42A9-852B-5B900A9780FA} = {A18379FE-650C-4186-B139-3C772BD4E919}
 		{6761398C-36A7-40D0-B88A-895266AA2CC0} = {A18379FE-650C-4186-B139-3C772BD4E919}
 		{8C37A643-7F55-45A0-9093-43F464857A64} = {A18379FE-650C-4186-B139-3C772BD4E919}
-		{F634C854-DE68-433D-B1EC-BD2150C2C523} = {AE9993CB-9EC2-424A-BE72-C37BC4C5FDF5}
+		{3CCE8377-0014-4BE8-BD8A-7CD7A8C9ACA3} = {AE9993CB-9EC2-424A-BE72-C37BC4C5FDF5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DA2BF26-9A27-4144-A691-BD8B8DEF3BBF}
 	EndGlobalSection
 EndGlobal

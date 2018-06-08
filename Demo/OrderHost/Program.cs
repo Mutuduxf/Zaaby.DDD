@@ -10,6 +10,7 @@ using Zaaby;
 using Zaaby.Client;
 using Zaaby.DDD;
 using Zaaby.DDD.Abstractions.Application;
+using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace OrderHost
 {
@@ -35,10 +36,9 @@ namespace OrderHost
                 .UseZaabyServer<IApplicationService>()
                 .UseDDD()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
-//                .AddSingleton<IEventBus, ZaabyRabbitMqClient>(p =>
-//                    new ZaabyRabbitMqClient(rabbitmqConfig, new Serializer()))
-//                .AddSingleton<ICache, ZaabyRedisClient>(p =>
-//                    new ZaabyRedisClient(redisConfig, new Zaaby.Cache.RedisProvider.Protobuf.Serializer()))
+                .AddSingleton<IEventBus>(p =>null)
+                //                .AddSingleton<ICache, ZaabyRedisClient>(p =>
+                //                    new ZaabyRedisClient(redisConfig, new Zaaby.Cache.RedisProvider.Protobuf.Serializer()))
                 .UseUrls("http://*:5001")
                 .Run();
         }
