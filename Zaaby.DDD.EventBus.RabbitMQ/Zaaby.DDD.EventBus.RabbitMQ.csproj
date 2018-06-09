@@ -2,12 +2,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.0.5</PackageVersion>
+    <PackageVersion>0.0.2</PackageVersion>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
-    <PackageTags>Zaaby DDD</PackageTags>
-    <Description>Abstractions for Zaaby.DDD</Description>
+    <PackageTags>Zaaby DDD EventBus RabbitMQ</PackageTags>
+    <Description>EventBus for Zaaby.DDD base by RabbitMQ</Description>
     <PackageProjectUrl>https://github.com/Mutuduxf/Zaaby.DDD</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/Mutuduxf/Zaaby.DDD/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Zaabee.RabbitMQ.Abstractions" Version="1.0.1" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.0.5" />
+  </ItemGroup>
 </Project>

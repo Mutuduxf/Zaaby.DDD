@@ -4,15 +4,15 @@ using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace OrderDomain.DomainServices.EventHandlers
 {
-    //public class ReceivedOrderEventHandler : DomainEventHandler<ReceivedOrderEvent>
-    //{
-    //    public ReceivedOrderEventHandler(IEventBus eventBus) : base(eventBus)
-    //    {
-    //    }
+    public class ReceivedOrderEventHandler : DomainEventHandler<ReceivedOrderEvent>
+    {
+        public ReceivedOrderEventHandler(IEventBus eventBus) : base(eventBus)
+        {
+        }
 
-    //    public override void Handle(ReceivedOrderEvent domainEvent)
-    //    {
+        public override void Handle(ReceivedOrderEvent domainEvent)
+        {
 
-    //    }
-    //}
+        }
+    }
 }

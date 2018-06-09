@@ -1,5 +1,5 @@
 ﻿{
-  "ZaabyRabbitMQ":{
+  "ZaabeeRabbitMQ":{
     "AutomaticRecoveryEnabled":"true",
     "HeartBeat":60,
     "NetworkRecoveryInterval":"00:00:00.0000060",

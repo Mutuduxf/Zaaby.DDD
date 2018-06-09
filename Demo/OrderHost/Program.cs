@@ -5,12 +5,16 @@ using Zaabee.Mongo;
 using Zaabee.Mongo.Abstractions;
 using Zaabee.Mongo.Common;
 using Zaabee.RabbitMQ;
+using Zaabee.RabbitMQ.Abstractions;
+using Zaabee.RabbitMQ.Jil;
 using Zaabee.Redis;
+using Zaabee.Redis.Abstractions;
 using Zaaby;
 using Zaaby.Client;
 using Zaaby.DDD;
 using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
+using Zaaby.DDD.EventBus.RabbitMQ;
 
 namespace OrderHost
 {
@@ -28,17 +32,19 @@ namespace OrderHost
 
             var appServiceConfig = config.GetSection("ZaabyApplication").Get<Dictionary<string, List<string>>>();
             var mongoConfig = config.GetSection("ZaabeMongo").Get<MongoDbConfiger>();
-            var rabbitmqConfig = config.GetSection("ZaabyRabbitMQ").Get<MqConfig>();
-            var redisConfig = config.GetSection("ZaabyRedis").Get<RedisConfig>();
+            var rabbitmqConfig = config.GetSection("ZaabeeRabbitMQ").Get<MqConfig>();
+            var redisConfig = config.GetSection("ZaabeeRedis").Get<RedisConfig>();
 
             ZaabyServer.GetInstance()
                 .UseZaabyClient(appServiceConfig)
                 .UseZaabyServer<IApplicationService>()
                 .UseDDD()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
-                .AddSingleton<IEventBus>(p =>null)
-                //                .AddSingleton<ICache, ZaabyRedisClient>(p =>
-                //                    new ZaabyRedisClient(redisConfig, new Zaaby.Cache.RedisProvider.Protobuf.Serializer()))
+                .AddSingleton<IZaabeeRabbitMqClient>(p =>
+                    new ZaabeeRabbitMqClient(rabbitmqConfig, new Serializer()))
+                .AddSingleton<IEventBus, ZaabyEventBus>()
+                .AddSingleton<IZaabeeRedisClient, ZaabeeRedisClient>(p =>
+                    new ZaabeeRedisClient(redisConfig, new Zaabee.Redis.Protobuf.Serializer()))
                 .UseUrls("http://*:5001")
                 .Run();
         }
