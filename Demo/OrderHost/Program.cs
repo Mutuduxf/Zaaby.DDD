@@ -31,7 +31,7 @@ namespace OrderHost
             var config = configBuilder.Build();
 
             var appServiceConfig = config.GetSection("ZaabyApplication").Get<Dictionary<string, List<string>>>();
-            var mongoConfig = config.GetSection("ZaabeMongo").Get<MongoDbConfiger>();
+            var mongoConfig = config.GetSection("ZaabeeMongo").Get<MongoDbConfiger>();
             var rabbitmqConfig = config.GetSection("ZaabeeRabbitMQ").Get<MqConfig>();
             var redisConfig = config.GetSection("ZaabeeRedis").Get<RedisConfig>();
 
