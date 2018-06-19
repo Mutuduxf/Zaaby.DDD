@@ -2,6 +2,6 @@
 {
     public interface IIntegrationEventHandler<in TIntegrationEvent> where TIntegrationEvent : IIntegrationEvent
     {
-        void Handle(TIntegrationEvent domainEvent);
+        void Handle(TIntegrationEvent integrationEvent);
     }
 }

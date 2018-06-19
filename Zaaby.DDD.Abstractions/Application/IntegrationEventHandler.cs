@@ -10,6 +10,6 @@ namespace Zaaby.DDD.Abstractions.Application
             eventBus.SubscribeEvent<TIntegrationEvent>(Handle);
         }
 
-        public abstract void Handle(TIntegrationEvent domainEvent);
+        public abstract void Handle(TIntegrationEvent integrationEvent);
     }
 }

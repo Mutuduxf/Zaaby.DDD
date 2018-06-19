@@ -2,12 +2,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.0.5</PackageVersion>
+    <PackageVersion>0.0.6</PackageVersion>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageTags>Zaaby DDD</PackageTags>
     <Description>Abstractions for Zaaby.DDD</Description>
     <PackageProjectUrl>https://github.com/Mutuduxf/Zaaby.DDD</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/Mutuduxf/Zaaby.DDD/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageReleaseNotes>Fix param name</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
