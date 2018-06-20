@@ -15,7 +15,7 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
 
         public void PublishEvent<T>(T @event) where T : IEvent
         {
-            _rabbitMqClient.PublishEvent<T>(@event);
+            _rabbitMqClient.PublishEvent(@event);
         }
 
         public void SubscribeEvent<T>(Action<T> handle) where T : IEvent
