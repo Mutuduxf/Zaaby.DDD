@@ -18,7 +18,7 @@
     <PackageReference Include="Zaabee.Redis.Protobuf" Version="1.1.0" />
     <PackageReference Include="Zaaby" Version="0.3.0" />
     <PackageReference Include="Zaaby.Client" Version="0.2.2018060801" />
-    <PackageReference Include="Zaaby.DDD.EventBus.RabbitMQ" Version="0.0.4" />
+    <PackageReference Include="Zaaby.DDD.EventBus.RabbitMQ" Version="0.0.5" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ApplicationService.json">

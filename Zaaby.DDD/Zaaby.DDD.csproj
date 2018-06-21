@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.0.5</PackageVersion>
+    <PackageVersion>0.0.6</PackageVersion>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageTags>Zaaby DDD</PackageTags>
@@ -12,6 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Zaaby.Abstractions" Version="0.3.2018060801" />
-    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.0.6" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.0.7" />
   </ItemGroup>
 </Project>

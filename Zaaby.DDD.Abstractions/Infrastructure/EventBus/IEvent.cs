@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Zaaby.DDD.Abstractions.Infrastructure.EventBus
+﻿namespace Zaaby.DDD.Abstractions.Infrastructure.EventBus
 {
     /// <summary>
     /// This message type will republish to dead letter queue when throw a exception.
     /// </summary>
     public interface IEvent
     {
-        DateTimeOffset Timestamp { get; }
+        string Version { get; set; }
     }
 }
