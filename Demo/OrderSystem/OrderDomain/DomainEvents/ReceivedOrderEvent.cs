@@ -1,9 +1,11 @@
-﻿using Zaaby.DDD.Abstractions.Domain;
+﻿using System;
+using Zaaby.DDD.Abstractions.Domain;
 
 namespace OrderDomain.DomainEvents
 {
-    public class ReceivedOrderEvent : DomainEvent
+    public class ReceivedOrderEvent : IDomainEvent
     {
+        public Guid Id { get; }
         public string OrderId { get; set; }
         public int ChargeLengthByMillimeter { get; set; }
         public int ChargeWidthByMillimeter { get; set; }

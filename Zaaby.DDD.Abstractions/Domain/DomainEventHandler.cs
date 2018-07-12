@@ -3,7 +3,7 @@
 namespace Zaaby.DDD.Abstractions.Domain
 {
     public abstract class DomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent>
-        where TDomainEvent : DomainEvent
+        where TDomainEvent : IDomainEvent
     {
         public DomainEventHandler(IEventBus eventBus)
         {

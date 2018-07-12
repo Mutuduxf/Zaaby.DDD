@@ -5,6 +5,5 @@
     /// </summary>
     public interface IEvent
     {
-        string Version { get; set; }
     }
 }
