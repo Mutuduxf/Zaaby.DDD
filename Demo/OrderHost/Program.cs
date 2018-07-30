@@ -13,7 +13,6 @@ using Zaaby;
 using Zaaby.Client;
 using Zaaby.DDD;
 using Zaaby.DDD.Abstractions.Application;
-using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 using Zaaby.DDD.EventBus.RabbitMQ;
 
 namespace OrderHost
@@ -39,10 +38,10 @@ namespace OrderHost
                 .UseZaabyClient(appServiceConfig)
                 .UseZaabyServer<IApplicationService>()
                 .UseDDD()
+                .UseEventBus()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
                 .AddSingleton<IZaabeeRabbitMqClient>(p =>
                     new ZaabeeRabbitMqClient(rabbitmqConfig, new Serializer()))
-                .AddSingleton<IEventBus, ZaabyEventBus>()
                 .AddSingleton<IZaabeeRedisClient, ZaabeeRedisClient>(p =>
                     new ZaabeeRedisClient(redisConfig, new Zaabee.Redis.Protobuf.Serializer()))
                 .UseUrls("http://*:5001")

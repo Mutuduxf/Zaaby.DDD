@@ -12,13 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Zaabee.Mongo" Version="1.2.5" />
-    <PackageReference Include="Zaabee.RabbitMQ" Version="1.2.5" />
+    <PackageReference Include="Zaabee.RabbitMQ" Version="1.2.7" />
     <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.0.1" />
     <PackageReference Include="Zaabee.Redis" Version="1.0.2" />
     <PackageReference Include="Zaabee.Redis.Protobuf" Version="1.1.0" />
-    <PackageReference Include="Zaaby" Version="0.3.0" />
-    <PackageReference Include="Zaaby.Client" Version="0.2.2018062901" />
-    <PackageReference Include="Zaaby.DDD.EventBus.RabbitMQ" Version="0.0.6" />
+    <PackageReference Include="Zaaby" Version="0.3.4" />
+    <PackageReference Include="Zaaby.Client" Version="0.2.2018072505" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ApplicationService.json">

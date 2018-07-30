@@ -1,6 +1,12 @@
 ﻿namespace Zaaby.DDD.Abstractions.Application
 {
-    public interface IIntegrationEventHandler<in TIntegrationEvent> where TIntegrationEvent : IIntegrationEvent
+    public interface IIntegrationEventHandler
+    {
+
+    }
+
+    public interface IIntegrationEventHandler<in TIntegrationEvent> : IIntegrationEventHandler
+        where TIntegrationEvent : IIntegrationEvent
     {
         void Handle(TIntegrationEvent integrationEvent);
     }

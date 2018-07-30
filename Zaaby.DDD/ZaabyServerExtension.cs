@@ -12,15 +12,11 @@ namespace Zaaby.DDD
 {
     public static class ZaabyServerExtension
     {
-        private static readonly List<Type> AllTypes;
-
-        static ZaabyServerExtension()
-        {
-            AllTypes = GetAllTypes();
-        }
+        private static List<Type> _allTypes;
 
         public static IZaabyServer UseDDD(this IZaabyServer zaabyServer)
         {
+            _allTypes = zaabyServer.AllTypes;
             return zaabyServer.UseApplicationService()
                 .UseIntegrationEventHandler()
                 .UseDomainService()
@@ -30,7 +26,7 @@ namespace Zaaby.DDD
 
         public static IZaabyServer UseApplicationService(this IZaabyServer zaabyServer)
         {
-            var applicationServiceQuery = AllTypes.Where(type => type.IsClass);
+            var applicationServiceQuery = _allTypes.Where(type => type.IsClass);
             applicationServiceQuery =
                 applicationServiceQuery.Where(type => typeof(IDomainService).IsAssignableFrom(type));
 
@@ -43,16 +39,14 @@ namespace Zaaby.DDD
 
         public static IZaabyServer UseIntegrationEventHandler(this IZaabyServer zaabyServer)
         {
-            var integrationEventHandlerQuery = AllTypes.Where(type => type.IsClass);
+            var integrationEventHandlerQuery = _allTypes.Where(type => type.IsClass);
             integrationEventHandlerQuery = integrationEventHandlerQuery.Where(type =>
-                type.BaseType != null &&
-                type.BaseType.IsGenericType &&
-                type.BaseType.GetGenericTypeDefinition() == typeof(IntegrationEventHandler<>));
+                typeof(IIntegrationEventHandler).IsAssignableFrom(type));
 
             var integrationEventHandlers = integrationEventHandlerQuery.ToList();
             integrationEventHandlers.ForEach(integrationEventHandler =>
             {
-                zaabyServer.AddSingleton(integrationEventHandler, integrationEventHandler);
+                zaabyServer.AddScoped(integrationEventHandler, integrationEventHandler);
                 zaabyServer.RegisterServiceRunner(integrationEventHandler);
             });
 
@@ -61,7 +55,7 @@ namespace Zaaby.DDD
 
         public static IZaabyServer UseDomainService(this IZaabyServer zaabyServer)
         {
-            var domainServiceQuery = AllTypes.Where(type => type.IsClass);
+            var domainServiceQuery = _allTypes.Where(type => type.IsClass);
             domainServiceQuery = domainServiceQuery.Where(type => typeof(IDomainService).IsAssignableFrom(type));
 
             var domainServices = domainServiceQuery.ToList();
@@ -72,16 +66,14 @@ namespace Zaaby.DDD
 
         public static IZaabyServer UseDomainEventHandler(this IZaabyServer zaabyServer)
         {
-            var domainEventHandlerQuery = AllTypes.Where(type => type.IsClass);
+            var domainEventHandlerQuery = _allTypes.Where(type => type.IsClass);
             domainEventHandlerQuery = domainEventHandlerQuery.Where(type =>
-                type.BaseType != null &&
-                type.BaseType.IsGenericType &&
-                type.BaseType.GetGenericTypeDefinition() == typeof(DomainEventHandler<>));
+                typeof(IDomainEventHandler).IsAssignableFrom(type));
 
             var domainEventHandlers = domainEventHandlerQuery.ToList();
             domainEventHandlers.ForEach(domainEventHandler =>
             {
-                zaabyServer.AddSingleton(domainEventHandler, domainEventHandler);
+                zaabyServer.AddScoped(domainEventHandler, domainEventHandler);
                 zaabyServer.RegisterServiceRunner(domainEventHandler);
             });
             return zaabyServer;
@@ -89,12 +81,12 @@ namespace Zaaby.DDD
 
         public static IZaabyServer UseRepository(this IZaabyServer zaabyServer)
         {
-            var allInterfaces = AllTypes.Where(type => type.IsInterface);
+            var allInterfaces = _allTypes.Where(type => type.IsInterface);
 
             var repositoryInterfaces = allInterfaces.Where(type => type.GetInterfaces().Any(@interface =>
                 @interface.IsGenericType && @interface.GetGenericTypeDefinition() == typeof(IRepository<,>)));
 
-            var implementRepositories = AllTypes
+            var implementRepositories = _allTypes
                 .Where(type => type.IsClass && repositoryInterfaces.Any(i => i.IsAssignableFrom(type)))
                 .ToList();
 
