@@ -7,7 +7,7 @@ namespace OrderDomain.DomainServices.EventHandlers
     {
         public void Handle(ReceivedOrderEvent domainEvent)
         {
-
+            var ii = 123123213;
         }
     }
 }

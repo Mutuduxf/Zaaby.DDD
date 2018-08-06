@@ -8,13 +8,13 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
 {
     public static class ZaabyServerExtension
     {
-        private static List<Type> _allTypes;
+        internal static List<Type> AllTypes;
 
         public static IZaabyServer UseEventBus(this IZaabyServer zaabyServer)
         {
-            _allTypes = zaabyServer.AllTypes;
+            AllTypes = zaabyServer.AllTypes;
             var interfaceType = typeof(IEventBus);
-            var eventBusType = _allTypes.FirstOrDefault(type => interfaceType.IsAssignableFrom(type));
+            var eventBusType = AllTypes.FirstOrDefault(type => interfaceType.IsAssignableFrom(type));
             if (eventBusType == null) return zaabyServer;
             zaabyServer.RegisterServiceRunner(interfaceType, eventBusType);
             return zaabyServer;

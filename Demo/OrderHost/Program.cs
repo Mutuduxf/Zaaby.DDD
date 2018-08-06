@@ -16,9 +16,9 @@ using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.EventBus.RabbitMQ;
 
 namespace OrderHost
-{
+{    
     class Program
-    {
+    {        
         static void Main(string[] args)
         {
             var configBuilder = new ConfigurationBuilder()
