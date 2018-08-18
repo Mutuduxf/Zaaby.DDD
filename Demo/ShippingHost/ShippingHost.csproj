@@ -4,13 +4,13 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Zaabee.Mongo" Version="1.2.5" />
-    <PackageReference Include="Zaabee.RabbitMQ" Version="1.2.7" />
-    <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.0.1" />
-    <PackageReference Include="Zaabee.Redis" Version="1.0.2" />
-    <PackageReference Include="Zaabee.Redis.Protobuf" Version="1.1.0" />
-    <PackageReference Include="Zaaby" Version="0.3.5" />
-    <PackageReference Include="Zaaby.Client" Version="0.2.2018072505" />
+    <PackageReference Include="Zaabee.Mongo" Version="1.2.6.1" />
+    <PackageReference Include="Zaabee.RabbitMQ" Version="1.2.8.1" />
+    <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.0.2.1" />
+    <PackageReference Include="Zaabee.Redis" Version="1.0.2.1" />
+    <PackageReference Include="Zaabee.Redis.Protobuf" Version="1.1.2.1" />
+    <PackageReference Include="Zaaby" Version="0.3.7.1" />
+    <PackageReference Include="Zaaby.Client" Version="0.3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zaaby.DDD.EventBus.RabbitMQ\Zaaby.DDD.EventBus.RabbitMQ.csproj" />

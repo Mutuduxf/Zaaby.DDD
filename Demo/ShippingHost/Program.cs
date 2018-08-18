@@ -32,7 +32,7 @@ namespace ShippingHost
 
             var appServiceConfig = config.GetSection("ZaabyApplication").Get<Dictionary<string, List<string>>>();
             var mongoConfig = config.GetSection("ZaabeeMongo").Get<MongoDbConfiger>();
-            var rabbitmqConfig = config.GetSection("ZaabeeRabbitMQ").Get<MqConfig>();
+            var rabbitMqConfig = config.GetSection("ZaabeeRabbitMQ").Get<MqConfig>();
             var redisConfig = config.GetSection("ZaabeeRedis").Get<RedisConfig>();
 
             ZaabyServer.GetInstance()
@@ -41,7 +41,7 @@ namespace ShippingHost
                 .UseDDD()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
                 .AddSingleton<IZaabeeRabbitMqClient>(p =>
-                    new ZaabeeRabbitMqClient(rabbitmqConfig, new Serializer()))
+                    new ZaabeeRabbitMqClient(rabbitMqConfig, new Serializer()))
                 .AddSingleton<IEventBus, ZaabyEventBus>()
                 .AddSingleton<IZaabeeRedisClient, ZaabeeRedisClient>(p =>
                     new ZaabeeRedisClient(redisConfig, new Zaabee.Redis.Protobuf.Serializer()))

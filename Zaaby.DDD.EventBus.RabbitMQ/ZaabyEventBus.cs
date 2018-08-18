@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Zaabee.RabbitMQ.Abstractions;
-using Zaaby.DDD.Abstractions.Domain;
+using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace Zaaby.DDD.EventBus.RabbitMQ
@@ -31,35 +31,40 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
 
         private void RegisterDomainEventSubscriber()
         {
-            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
-                .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
+            var integrationEventHandlerTypes = ZaabyServerExtension.AllTypes
+                .Where(type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type)).ToList();
 
-            domainEventHandlerTypes.ForEach(domainEventHandlerType =>
+            var subscribeMethod = _rabbitMqClient.GetType().GetMethod("SubscribeEvent");
+
+            integrationEventHandlerTypes.ForEach(integrationEventHandlerType =>
             {
-                var i = _serviceProvider.GetService(domainEventHandlerType);
-                var d1 = i is IDomainEventHandler<IDomainEvent>;
-                var d2 = i as IDomainEventHandler<IDomainEvent>;
-                var d3 = i is IDomainEventHandler;
-                var d4 = i as IDomainEventHandler;
-                var tt = i.GetType();
-                var i0 = tt.GetInterfaces();
-                var i1 = tt.BaseType?.IsGenericType;
-                var i2 = tt.BaseType?.IsGenericTypeDefinition;
-
-                var handleMethod = tt.GetMethod("Handle");
-                handleMethod.Invoke(i,new object[] {"hello"});
+                subscribeMethod.MakeGenericMethod(integrationEventHandlerType).Invoke(_rabbitMqClient, null);
                 
-                
-                
-                
-                var r2 = (IDomainEventHandler<IDomainEvent>)i;
-                
-                _rabbitMqClient.SubscribeEvent<IDomainEvent>(domainEventHandlerType.FullName, p =>
-                {
-                    if (_serviceProvider.GetService(domainEventHandlerType) is IDomainEventHandler<IDomainEvent>
-                        domainEventHandler)
-                        domainEventHandler.Handle(p);
-                });
+//                var i = _serviceProvider.GetService(integrationEventHandlerType);
+//                var d1 = i is IIntegrationEventHandler<IIntegrationEvent>;
+//                var d2 = i as IIntegrationEventHandler<IIntegrationEvent>;
+//                var d3 = i is IIntegrationEventHandler;
+//                var d4 = i as IIntegrationEventHandler;
+//                var tt = i.GetType();
+//                var i0 = tt.GetInterfaces();
+//                var i1 = tt.BaseType?.IsGenericType;
+//                var i2 = tt.BaseType?.IsGenericTypeDefinition;
+//
+//                var handleMethod = tt.GetMethod("Handle");
+//                handleMethod.Invoke(i, new object[] {"hello"});
+//
+//
+//
+//
+//                var r2 = (IIntegrationEventHandler<IIntegrationEvent>) i;
+//
+//                _rabbitMqClient.SubscribeEvent<IIntegrationEvent>(integrationEventHandlerType.FullName, p =>
+//                {
+//                    if (_serviceProvider.GetService(integrationEventHandlerType) is
+//                        IIntegrationEventHandler<IIntegrationEvent>
+//                        domainEventHandler)
+//                        domainEventHandler.Handle(p);
+//                });
             });
         }
     }
