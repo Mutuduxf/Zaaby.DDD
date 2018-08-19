@@ -9,8 +9,8 @@
     <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.0.2.1" />
     <PackageReference Include="Zaabee.Redis" Version="1.0.2.1" />
     <PackageReference Include="Zaabee.Redis.Protobuf" Version="1.1.2.1" />
-    <PackageReference Include="Zaaby" Version="0.3.7.1" />
-    <PackageReference Include="Zaaby.Client" Version="0.3.0.0" />
+    <PackageReference Include="Zaaby" Version="0.4.0" />
+    <PackageReference Include="Zaaby.Client" Version="0.4.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zaaby.DDD.EventBus.RabbitMQ\Zaaby.DDD.EventBus.RabbitMQ.csproj" />
