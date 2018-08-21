@@ -17,21 +17,18 @@ namespace Zaaby.DDD
             AllTypes = zaabyServer.AllTypes;
             return zaabyServer.UseApplicationService()
                 .UseIntegrationEventHandler()
-//                .UseDomainService()
-                .UseDomainEventHandler()
+                .UseDomainService()
+                //TODO
+                //.UseDomainEventHandler()
                 .UseRepository();
         }
 
         public static IZaabyServer UseApplicationService(this IZaabyServer zaabyServer)
         {
-            var applicationServiceQuery = AllTypes.Where(type => type.IsClass);
-            applicationServiceQuery =
-                applicationServiceQuery.Where(type => typeof(IDomainService).IsAssignableFrom(type));
-
-            var applicationServices = applicationServiceQuery.ToList();
-
-            applicationServices.ForEach(applicationService =>
-                zaabyServer.AddScoped(applicationService, applicationService));
+            var applicationServiceTypes = AllTypes
+                .Where(type => type.IsClass && typeof(IApplicationService).IsAssignableFrom(type)).ToList();
+            applicationServiceTypes.ForEach(integrationEventSubscriberType =>
+                zaabyServer.AddScoped(integrationEventSubscriberType));
             return zaabyServer;
         }
 
@@ -40,28 +37,26 @@ namespace Zaaby.DDD
             var integrationEventSubscriberTypes = AllTypes
                 .Where(type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type)).ToList();
             integrationEventSubscriberTypes.ForEach(integrationEventSubscriberType =>
-                zaabyServer.AddScoped(integrationEventSubscriberType));
+                zaabyServer.AddTransient(integrationEventSubscriberType));
             return zaabyServer;
         }
 
         public static IZaabyServer UseDomainService(this IZaabyServer zaabyServer)
         {
-            var domainServiceQuery = AllTypes.Where(type => type.IsClass);
-            domainServiceQuery = domainServiceQuery.Where(type => typeof(IDomainService).IsAssignableFrom(type));
-
-            var domainServices = domainServiceQuery.ToList();
-
-            domainServices.ForEach(domainService => zaabyServer.AddScoped(domainService, domainService));
-            zaabyServer.RegisterServiceRunner(typeof(DomainEventPublisher));
+            var domainServiceTypes = AllTypes
+                .Where(type => type.IsClass && typeof(IDomainService).IsAssignableFrom(type)).ToList();
+            domainServiceTypes.ForEach(integrationEventSubscriberType =>
+                zaabyServer.AddScoped(integrationEventSubscriberType));
             return zaabyServer;
         }
 
         public static IZaabyServer UseDomainEventHandler(this IZaabyServer zaabyServer)
         {
             var domainEventSubscriberTypes = AllTypes
-                .Where(type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type)).ToList();
+                .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
             domainEventSubscriberTypes.ForEach(domainEventSubscriberType =>
                 zaabyServer.AddScoped(domainEventSubscriberType));
+//            zaabyServer.RegisterServiceRunner(typeof(DomainEventPublisher));
             return zaabyServer;
         }
 
