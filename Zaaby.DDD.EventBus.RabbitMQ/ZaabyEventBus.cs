@@ -8,7 +8,7 @@ using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace Zaaby.DDD.EventBus.RabbitMQ
 {
-    public class ZaabyEventBus : IEventBus
+    public class ZaabyEventBus : IIntegrationEventBus
     {
         private readonly IZaabeeRabbitMqClient _rabbitMqClient;
         private readonly IServiceProvider _serviceProvider;
@@ -24,12 +24,12 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
             RegisterIntegrationEventSubscriber();
         }
 
-        public void PublishEvent<T>(T @event) where T : IEvent
+        public void PublishEvent<T>(T @event) where T : IIntegrationEvent
         {
             _rabbitMqClient.PublishEvent(GetTypeName(typeof(T)), @event);
         }
 
-        public void SubscribeEvent<T>(Action<T> handle) where T : IEvent
+        public void SubscribeEvent<T>(Action<T> handle) where T : IIntegrationEvent
         {
             _rabbitMqClient.SubscribeEvent(handle);
         }
