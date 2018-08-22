@@ -43,7 +43,6 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
             var methods = rabbitMqClientType.GetMethods();
             var subscribeMethod = methods.First(m =>
                 m.Name == "SubscribeEvent" &&
-                m.GetParameters().Count() == 4 &&
                 m.GetParameters()[0].Name == "exchange" &&
                 m.GetParameters()[1].Name == "queue" &&
                 m.GetParameters()[2].ParameterType.ContainsGenericParameters &&
@@ -58,15 +57,15 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
                         typeof(IIntegrationEvent).IsAssignableFrom(m.GetParameters()[0].ParameterType)
                     );
 
-                var paramT = handleMethod.GetParameters()[0].ParameterType;
+                var integrationEventType = handleMethod.GetParameters()[0].ParameterType;
 
-                var paramTypeName = GetTypeName(paramT);
+                var paramTypeName = GetTypeName(integrationEventType);
                 var exchangeName = paramTypeName;
                 var queueName = GetQueueName(handleMethod, paramTypeName);
 
                 void HandleAction(IIntegrationEvent integrationEvent)
                 {
-                    var actionT = typeof(Action<>).MakeGenericType(paramT);
+                    var actionT = typeof(Action<>).MakeGenericType(integrationEventType);
                     var handler = _serviceProvider.GetService(integrationEventHandlerType);
                     var @delegate = Delegate.CreateDelegate(actionT, handler, handleMethod);
                     @delegate.Method.Invoke(handler, new object[] {integrationEvent});

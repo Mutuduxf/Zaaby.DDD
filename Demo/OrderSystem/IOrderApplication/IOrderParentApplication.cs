@@ -8,5 +8,6 @@ namespace IOrderApplication
         OrderParentDto GetOrderParentDto(string id);
         string OrderSystemTest();
         OrderParentDto Test();
+        int PublishEvent(int quantity);
     }
 }
