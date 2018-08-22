@@ -2,7 +2,6 @@
 {
     public interface IIntegrationEventHandler
     {
-
     }
 
     public interface IIntegrationEventHandler<in TIntegrationEvent> : IIntegrationEventHandler
