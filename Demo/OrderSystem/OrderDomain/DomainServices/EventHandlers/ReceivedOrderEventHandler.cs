@@ -1,5 +1,4 @@
-﻿using System;
-using OrderDomain.DomainEvents;
+﻿using OrderDomain.DomainEvents;
 using Zaaby.DDD.Abstractions.Domain;
 
 namespace OrderDomain.DomainServices.EventHandlers
@@ -8,7 +7,7 @@ namespace OrderDomain.DomainServices.EventHandlers
     {
         public void Handle(ReceivedOrderEvent domainEvent)
         {
-            throw new NotImplementedException();
+            var i = this.GetHashCode();
         }
     }
 }

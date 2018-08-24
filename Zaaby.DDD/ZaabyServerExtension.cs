@@ -4,6 +4,7 @@ using System.Linq;
 using Zaaby.Abstractions;
 using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.Abstractions.Domain;
+using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 using Zaaby.DDD.Abstractions.Infrastructure.Repository;
 
 namespace Zaaby.DDD
@@ -18,8 +19,7 @@ namespace Zaaby.DDD
             return zaabyServer.UseApplicationService()
                 .UseIntegrationEventHandler()
                 .UseDomainService()
-                //TODO
-                //.UseDomainEventHandler()
+                .UseDomainEventHandler()
                 .UseRepository();
         }
 
@@ -37,7 +37,7 @@ namespace Zaaby.DDD
             var integrationEventSubscriberTypes = AllTypes
                 .Where(type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type)).ToList();
             integrationEventSubscriberTypes.ForEach(integrationEventSubscriberType =>
-                zaabyServer.AddTransient(integrationEventSubscriberType));
+                zaabyServer.AddScoped(integrationEventSubscriberType));
             return zaabyServer;
         }
 
@@ -56,7 +56,7 @@ namespace Zaaby.DDD
                 .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
             domainEventSubscriberTypes.ForEach(domainEventSubscriberType =>
                 zaabyServer.AddScoped(domainEventSubscriberType));
-//            zaabyServer.RegisterServiceRunner(typeof(DomainEventPublisher));
+            zaabyServer.RegisterServiceRunner(typeof(IDomainEventPublisher), typeof(DomainEventPublisher));
             return zaabyServer;
         }
 

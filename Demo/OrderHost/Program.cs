@@ -35,9 +35,9 @@ namespace OrderHost
             var redisConfig = config.GetSection("ZaabeeRedis").Get<RedisConfig>();
 
             ZaabyServer.GetInstance()
+                .UseDDD()
                 .UseZaabyClient(appServiceConfig)
                 .UseZaabyServer<IApplicationService>()
-                .UseDDD()
                 .UseEventBus()
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
                 .AddSingleton<IZaabeeRabbitMqClient>(p =>

@@ -9,5 +9,6 @@ namespace IOrderApplication
         string OrderSystemTest();
         OrderParentDto Test();
         int PublishEvent(int quantity);
+        void DomainEventTest();
     }
 }

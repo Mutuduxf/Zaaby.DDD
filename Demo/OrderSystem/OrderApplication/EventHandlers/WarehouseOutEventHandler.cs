@@ -7,7 +7,7 @@ namespace OrderApplication.EventHandlers
     {
         public void Handle(WarehouseOutEvent integrationEvent)
         {
-            //throw new System.NotImplementedException();
+            var i = this.GetHashCode();
         }
     }
 }

@@ -42,7 +42,7 @@ namespace FinanceHost
                 .AddSingleton<IZaabeeMongoClient>(p => new ZaabeeMongoClient(mongoConfig))
                 .AddSingleton<IZaabeeRabbitMqClient>(p =>
                     new ZaabeeRabbitMqClient(rabbitMqConfig, new Serializer()))
-                .AddSingleton<IEventBus, ZaabyEventBus>()
+                .AddSingleton<IIntegrationEventBus, ZaabyEventBus>()
                 .AddSingleton<IZaabeeRedisClient, ZaabeeRedisClient>(p =>
                     new ZaabeeRedisClient(redisConfig, new Zaabee.Redis.Protobuf.Serializer()))
                 .UseUrls("http://*:5000")
