@@ -14,18 +14,23 @@ namespace Zaaby.DDD
         public DomainEventPublisher(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            RegisterIntegrationEventSubscriber();
+            RegisterDomainEventSubscriber();
         }
 
-        private readonly ConcurrentDictionary<Type, List<Func<IDomainEventHandler<IDomainEvent>>>>
-            _subscriberResolves = new ConcurrentDictionary<Type, List<Func<IDomainEventHandler<IDomainEvent>>>>();
+        private readonly ConcurrentDictionary<Type, List<Func<IDomainEventHandler>>>
+            _subscriberResolves = new ConcurrentDictionary<Type, List<Func<IDomainEventHandler>>>();
 
         public void Subscribe<TDomainEvent>(Func<IDomainEventHandler> resolve) where TDomainEvent : IDomainEvent
         {
             var domainEventType = typeof(TDomainEvent);
+            Subscribe(domainEventType, resolve);
+        }
+
+        public void Subscribe(Type domainEventType, Func<IDomainEventHandler> resolve)
+        {
             if (!_subscriberResolves.ContainsKey(domainEventType))
-                _subscriberResolves.TryAdd(domainEventType, new List<Func<IDomainEventHandler<IDomainEvent>>>());
-            _subscriberResolves[domainEventType].Add((Func<IDomainEventHandler<IDomainEvent>>) resolve);
+                _subscriberResolves.TryAdd(domainEventType, new List<Func<IDomainEventHandler>>());
+            _subscriberResolves[domainEventType].Add(resolve);
         }
 
         public void Reset()
@@ -33,14 +38,25 @@ namespace Zaaby.DDD
             _subscriberResolves.Clear();
         }
 
-        public void PublishEvent<T>(T @event) where T : IDomainEvent
+        public void PublishEvent<T>(T domainEvent) where T : IDomainEvent
         {
             var type = typeof(T);
             if (!_subscriberResolves.ContainsKey(type)) return;
-            _subscriberResolves[type].ForEach(resolve => resolve().Handle(@event));
+            _subscriberResolves[type].ForEach(resolve =>
+            {
+                var handler = resolve();
+                var handlerType = handler.GetType();
+                var handleMethodInfo = handlerType.GetMethods()
+                    .First(m =>
+                        m.Name == "Handle" &&
+                        m.GetParameters().Count() == 1 &&
+                        typeof(IDomainEvent).IsAssignableFrom(m.GetParameters()[0].ParameterType)
+                    );
+                handleMethodInfo.Invoke(handler, new object[] {domainEvent});
+            });
         }
 
-        private void RegisterIntegrationEventSubscriber()
+        private void RegisterDomainEventSubscriber()
         {
             var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
                 .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
@@ -54,11 +70,8 @@ namespace Zaaby.DDD
                         typeof(IDomainEvent).IsAssignableFrom(m.GetParameters()[0].ParameterType)
                     );
                 var domainEventType = handleMethod.GetParameters()[0].ParameterType;
-                if (!_subscriberResolves.ContainsKey(domainEventType))
-                    _subscriberResolves.TryAdd(domainEventType,
-                        new List<Func<IDomainEventHandler<IDomainEvent>>>());
-                _subscriberResolves[domainEventType]
-                    .Add(() => (IDomainEventHandler<IDomainEvent>) _serviceProvider.GetService(domainEventHandlerType));
+                Subscribe(domainEventType,
+                    () => (IDomainEventHandler)_serviceProvider.GetService(domainEventHandlerType));
             });
         }
     }
