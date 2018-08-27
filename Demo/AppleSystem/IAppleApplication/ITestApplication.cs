@@ -5,5 +5,6 @@ namespace IAppleApplication
     public interface ITestApplication : IApplicationService
     {
         void DomainEventTest();
+        void IntegrationEventTest();
     }
 }

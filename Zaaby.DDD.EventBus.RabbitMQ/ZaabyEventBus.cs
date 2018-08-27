@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Zaabee.RabbitMQ.Abstractions;
 using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
@@ -11,15 +12,15 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
     public class ZaabyEventBus : IIntegrationEventBus
     {
         private readonly IZaabeeRabbitMqClient _rabbitMqClient;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         private readonly ConcurrentDictionary<Type, string> _queueNameDic =
             new ConcurrentDictionary<Type, string>();
 
-        public ZaabyEventBus(IServiceProvider serviceProvider, IZaabeeRabbitMqClient rabbitMqClient)
+        public ZaabyEventBus(IServiceScopeFactory serviceScopeFactory, IZaabeeRabbitMqClient rabbitMqClient)
         {
             _rabbitMqClient = rabbitMqClient;
-            _serviceProvider = serviceProvider;
+            _serviceScopeFactory = serviceScopeFactory;
 
             RegisterIntegrationEventSubscriber();
         }
@@ -66,13 +67,18 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
                 void HandleAction(IIntegrationEvent integrationEvent)
                 {
                     var actionT = typeof(Action<>).MakeGenericType(integrationEventType);
-                    var handler = _serviceProvider.GetService(integrationEventHandlerType);
-                    var @delegate = Delegate.CreateDelegate(actionT, handler, handleMethod);
-                    @delegate.Method.Invoke(handler, new object[] {integrationEvent});
+                    using (var scope = _serviceScopeFactory.CreateScope())
+                    {
+                        var handler = scope.ServiceProvider
+                            .GetService(integrationEventHandlerType);
+                        var @delegate = Delegate.CreateDelegate(actionT, handler, handleMethod);
+                        @delegate.Method.Invoke(handler, new object[] {integrationEvent});
+                    }
                 }
 
                 subscribeMethod.MakeGenericMethod(handleMethod.GetParameters()[0].ParameterType)
-                    .Invoke(_rabbitMqClient, new object[] {exchangeName, queueName, (Action<IIntegrationEvent>) HandleAction, (ushort) 10});
+                    .Invoke(_rabbitMqClient,
+                        new object[] {exchangeName, queueName, (Action<IIntegrationEvent>) HandleAction, (ushort) 10});
             });
         }
 

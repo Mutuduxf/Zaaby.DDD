@@ -17,6 +17,7 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
             var eventBusType =
                 AllTypes.FirstOrDefault(type => interfaceType.IsAssignableFrom(type) && type.IsClass);
             if (eventBusType == null) return zaabyServer;
+            zaabyServer.AddSingleton(interfaceType, eventBusType);
             zaabyServer.RegisterServiceRunner(interfaceType, eventBusType);
             return zaabyServer;
         }
