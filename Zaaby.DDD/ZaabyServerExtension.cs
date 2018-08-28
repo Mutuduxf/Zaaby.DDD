@@ -56,7 +56,8 @@ namespace Zaaby.DDD
                 .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
             domainEventSubscriberTypes.ForEach(domainEventSubscriberType =>
                 zaabyServer.AddScoped(domainEventSubscriberType));
-            zaabyServer.RegisterServiceRunner(typeof(IDomainEventPublisher), typeof(DomainEventPublisher));
+            zaabyServer.AddScoped(typeof(IDomainEventPublisher), typeof(DomainEventPublisher));
+            zaabyServer.AddScoped<DomainEventHandlerProvider>();
             return zaabyServer;
         }
 

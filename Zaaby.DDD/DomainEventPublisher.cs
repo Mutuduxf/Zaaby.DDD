@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using Zaaby.DDD.Abstractions.Domain;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
@@ -10,42 +8,37 @@ namespace Zaaby.DDD
     public class DomainEventPublisher : IDomainEventPublisher
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly DomainEventHandlerProvider _domainEventHandlerProvider;
 
-        public DomainEventPublisher(IServiceProvider serviceProvider)
+        public DomainEventPublisher(IServiceProvider serviceProvider,
+            DomainEventHandlerProvider domainEventHandlerProvider)
         {
             _serviceProvider = serviceProvider;
-            RegisterDomainEventSubscriber();
+            _domainEventHandlerProvider = domainEventHandlerProvider;
         }
 
-        private readonly ConcurrentDictionary<Type, List<Func<IDomainEventHandler>>>
-            _subscriberResolves = new ConcurrentDictionary<Type, List<Func<IDomainEventHandler>>>();
-
-        public void Subscribe<TDomainEvent>(Func<IDomainEventHandler> resolve) where TDomainEvent : IDomainEvent
+        public void Subscribe<TDomainEvent>(Type handlerType) where TDomainEvent : IDomainEvent
         {
-            var domainEventType = typeof(TDomainEvent);
-            Subscribe(domainEventType, resolve);
+            _domainEventHandlerProvider.Register<TDomainEvent>(handlerType);
         }
 
-        public void Subscribe(Type domainEventType, Func<IDomainEventHandler> resolve)
+        public void Subscribe(Type domainEventType, Type handlerType)
         {
-            if (!_subscriberResolves.ContainsKey(domainEventType))
-                _subscriberResolves.TryAdd(domainEventType, new List<Func<IDomainEventHandler>>());
-            _subscriberResolves[domainEventType].Add(resolve);
+            _domainEventHandlerProvider.Register(domainEventType, handlerType);
         }
 
         public void Reset()
         {
-            _subscriberResolves.Clear();
+            _domainEventHandlerProvider.SubscriberResolves.Clear();
         }
 
         public void PublishEvent<T>(T domainEvent) where T : IDomainEvent
         {
             var type = typeof(T);
-            if (!_subscriberResolves.ContainsKey(type)) return;
-            _subscriberResolves[type].ForEach(resolve =>
+            if (!_domainEventHandlerProvider.SubscriberResolves.ContainsKey(type)) return;
+            _domainEventHandlerProvider.SubscriberResolves[type].ForEach(handlerType =>
             {
-                var handler = resolve();
-                var handlerType = handler.GetType();
+                var handler = (IDomainEventHandler) _serviceProvider.GetService(handlerType);
                 var handleMethodInfo = handlerType.GetMethods()
                     .First(m =>
                         m.Name == "Handle" &&
@@ -53,25 +46,6 @@ namespace Zaaby.DDD
                         typeof(IDomainEvent).IsAssignableFrom(m.GetParameters()[0].ParameterType)
                     );
                 handleMethodInfo.Invoke(handler, new object[] {domainEvent});
-            });
-        }
-
-        private void RegisterDomainEventSubscriber()
-        {
-            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
-                .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
-
-            domainEventHandlerTypes.ForEach(domainEventHandlerType =>
-            {
-                var handleMethod = domainEventHandlerType.GetMethods()
-                    .First(m =>
-                        m.Name == "Handle" &&
-                        m.GetParameters().Count() == 1 &&
-                        typeof(IDomainEvent).IsAssignableFrom(m.GetParameters()[0].ParameterType)
-                    );
-                var domainEventType = handleMethod.GetParameters()[0].ParameterType;
-                Subscribe(domainEventType,
-                    () => (IDomainEventHandler)_serviceProvider.GetService(domainEventHandlerType));
             });
         }
     }
