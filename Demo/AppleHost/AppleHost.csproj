@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Zaaby.DDD.EventBus.RabbitMQ\Zaaby.DDD.EventBus.RabbitMQ.csproj" />
+      <ProjectReference Include="..\..\Zaaby.DDD\Zaaby.DDD.csproj" />
+      <ProjectReference Include="..\AppleSystem\AppleApplication\AppleApplication.csproj" />
+      <ProjectReference Include="..\AppleSystem\AppleRepository\AppleRepository.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Zaabee.RabbitMQ" Version="1.3.0" />
+      <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.0.2.1" />
+      <PackageReference Include="Zaaby" Version="0.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="RabbitMQ.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationService.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Mongo.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Redis.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
