@@ -19,7 +19,6 @@ namespace AppleApplication
         public void DomainEventTest()
         {
             _appleDomainService.PublishDomainEventTest();
-            _appleDomainService.PublishDomainEventTest();
         }
 
         public void IntegrationEventTest()

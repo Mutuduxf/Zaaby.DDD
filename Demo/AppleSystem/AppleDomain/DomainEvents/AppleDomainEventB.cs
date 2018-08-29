@@ -3,7 +3,7 @@ using Zaaby.DDD.Abstractions.Domain;
 
 namespace AppleDomain.DomainEvents
 {
-    public class AppleDomainEvent : IDomainEvent
+    public class AppleDomainEventB : IDomainEvent
     {
         public DateTimeOffset CreateTime { get; set; }
     }

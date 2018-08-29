@@ -57,7 +57,7 @@ namespace Zaaby.DDD
             domainEventSubscriberTypes.ForEach(domainEventSubscriberType =>
                 zaabyServer.AddScoped(domainEventSubscriberType));
             zaabyServer.AddScoped(typeof(IDomainEventPublisher), typeof(DomainEventPublisher));
-            zaabyServer.AddScoped<DomainEventHandlerProvider>();
+            zaabyServer.AddSingleton<DomainEventHandlerProvider>();
             return zaabyServer;
         }
 

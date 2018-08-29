@@ -18,7 +18,9 @@ namespace AppleDomain.DomainServices
 
         public void PublishDomainEventTest()
         {
-            _domainEventPublisher.PublishEvent(new AppleDomainEvent());
+            _domainEventPublisher.PublishEvent(new AppleDomainEventA());
+            _domainEventPublisher.PublishEvent(new AppleDomainEventB());
+            var i = AppleRepository.GetHashCode();
         }
     }
 }
