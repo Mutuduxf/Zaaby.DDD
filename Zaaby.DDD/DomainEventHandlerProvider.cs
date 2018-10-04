@@ -35,11 +35,11 @@ namespace Zaaby.DDD
         {
             if (!SubscriberResolves.ContainsKey(domainEventType))
                 SubscriberResolves.TryAdd(domainEventType, new List<MethodInfo>());
-            var handleMethod = handlerType.GetMethods().FirstOrDefault(m =>
+            var handleMethods = handlerType.GetMethods().Where(m =>
                 m.Name == "Handle" &&
                 m.GetParameters().Count() == 1 &&
                 m.GetParameters()[0].ParameterType == domainEventType);
-            if (handleMethod != null)
+            foreach (var handleMethod in handleMethods)
                 SubscriberResolves[domainEventType].Add(handleMethod);
         }
 
