@@ -45,9 +45,9 @@ namespace Zaaby.DDD
 
         private void RegisterDomainEventHandler()
         {
-            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
-                .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
             var handlerBaseInterface = typeof(IDomainEventHandler);
+            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
+                .Where(type => type.IsClass && handlerBaseInterface.IsAssignableFrom(type)).ToList();
 
             domainEventHandlerTypes.ForEach(domainEventHandlerType =>
             {
