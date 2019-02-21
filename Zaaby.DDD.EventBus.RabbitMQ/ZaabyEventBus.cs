@@ -40,9 +40,11 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
             var integrationEventHandlerTypes = ZaabyServerExtension.AllTypes
                 .Where(type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type)).ToList();
 
+            var integrationEventTypes = ZaabyServerExtension.AllTypes
+                .Where(type => type.IsClass && typeof(IIntegrationEvent).IsAssignableFrom(type)).ToList();
+
             var rabbitMqClientType = _rabbitMqClient.GetType();
-            var methods = rabbitMqClientType.GetMethods();
-            var subscribeMethod = methods.First(m =>
+            var subscribeMethod = rabbitMqClientType.GetMethods().First(m =>
                 m.Name == "SubscribeEvent" &&
                 m.GetParameters()[0].Name == "exchange" &&
                 m.GetParameters()[1].Name == "queue" &&
@@ -51,34 +53,37 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
 
             integrationEventHandlerTypes.ForEach(integrationEventHandlerType =>
             {
-                var handleMethod = integrationEventHandlerType.GetMethods()
-                    .First(m =>
+                var handleMethods = integrationEventHandlerType.GetMethods()
+                    .Where(m =>
                         m.Name == "Handle" &&
                         m.GetParameters().Count() == 1 &&
-                        typeof(IIntegrationEvent).IsAssignableFrom(m.GetParameters()[0].ParameterType)
-                    );
+                        integrationEventTypes.Contains(m.GetParameters()[0].ParameterType)
+                    ).ToList();
 
-                var integrationEventType = handleMethod.GetParameters()[0].ParameterType;
-
-                var paramTypeName = GetTypeName(integrationEventType);
-                var exchangeName = paramTypeName;
-                var queueName = GetQueueName(handleMethod, paramTypeName);
-
-                void HandleAction(IIntegrationEvent integrationEvent)
+                handleMethods.ForEach(handleMethod =>
                 {
-                    var actionT = typeof(Action<>).MakeGenericType(integrationEventType);
-                    using (var scope = _serviceScopeFactory.CreateScope())
-                    {
-                        var handler = scope.ServiceProvider
-                            .GetService(integrationEventHandlerType);
-                        var @delegate = Delegate.CreateDelegate(actionT, handler, handleMethod);
-                        @delegate.Method.Invoke(handler, new object[] {integrationEvent});
-                    }
-                }
+                    var integrationEventType = handleMethod.GetParameters()[0].ParameterType;
 
-                subscribeMethod.MakeGenericMethod(handleMethod.GetParameters()[0].ParameterType)
-                    .Invoke(_rabbitMqClient,
-                        new object[] {exchangeName, queueName, (Action<IIntegrationEvent>) HandleAction, (ushort) 10});
+                    var paramTypeName = GetTypeName(integrationEventType);
+                    var exchangeName = paramTypeName;
+                    var queueName = GetQueueName(handleMethod, paramTypeName);
+
+                    void HandleAction(object integrationEvent)
+                    {
+                        var actionT = typeof(Action<>).MakeGenericType(integrationEventType);
+                        using (var scope = _serviceScopeFactory.CreateScope())
+                        {
+                            var handler = scope.ServiceProvider
+                                .GetService(integrationEventHandlerType);
+                            var @delegate = Delegate.CreateDelegate(actionT, handler, handleMethod);
+                            @delegate.Method.Invoke(handler, new[] {integrationEvent});
+                        }
+                    }
+
+                    subscribeMethod.MakeGenericMethod(handleMethod.GetParameters()[0].ParameterType)
+                        .Invoke(_rabbitMqClient,
+                            new object[] {exchangeName, queueName, (Action<object>) HandleAction, (ushort) 10});
+                });
             });
         }
 

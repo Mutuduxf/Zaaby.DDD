@@ -35,19 +35,19 @@ namespace Zaaby.DDD
         {
             if (!SubscriberResolves.ContainsKey(domainEventType))
                 SubscriberResolves.TryAdd(domainEventType, new List<MethodInfo>());
-            var handleMethod = handlerType.GetMethods().FirstOrDefault(m =>
+            var handleMethods = handlerType.GetMethods().Where(m =>
                 m.Name == "Handle" &&
                 m.GetParameters().Count() == 1 &&
                 m.GetParameters()[0].ParameterType == domainEventType);
-            if (handleMethod != null)
+            foreach (var handleMethod in handleMethods)
                 SubscriberResolves[domainEventType].Add(handleMethod);
         }
 
         private void RegisterDomainEventHandler()
         {
-            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
-                .Where(type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type)).ToList();
             var handlerBaseInterface = typeof(IDomainEventHandler);
+            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
+                .Where(type => type.IsClass && handlerBaseInterface.IsAssignableFrom(type)).ToList();
 
             domainEventHandlerTypes.ForEach(domainEventHandlerType =>
             {

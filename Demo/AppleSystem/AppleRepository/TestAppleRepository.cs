@@ -4,6 +4,5 @@ namespace AppleRepository
 {
     public class TestAppleRepository : IAppleRepository
     {
-
     }
 }

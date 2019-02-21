@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AppleDomain\AppleDomain.csproj" />
-      <ProjectReference Include="..\IAppleApplication\IAppleApplication.csproj" />
     </ItemGroup>
 
 </Project>
