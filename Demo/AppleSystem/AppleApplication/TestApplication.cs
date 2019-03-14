@@ -1,6 +1,9 @@
+using System.Linq;
+using AppleDomain.AggregateRoots;
 using AppleDomain.DomainServices;
 using IAppleApplication;
 using IAppleApplication.IntegrationEvents;
+using Zaabee.SequentialGuid;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace AppleApplication
@@ -24,6 +27,14 @@ namespace AppleApplication
         public void IntegrationEventTest()
         {
             _integrationEventBus.PublishEvent(new AppleIntegrationEvent());
+        }
+
+        public int AddApple(int quantity)
+        {
+            var apples = Enumerable.Range(0, quantity)
+                .Select(p => new Apple(SequentialGuidHelper.GenerateComb())).ToList();
+            _appleDomainService.AddApple(apples);
+            return quantity;
         }
     }
 }

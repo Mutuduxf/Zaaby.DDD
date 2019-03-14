@@ -1,3 +1,4 @@
+using IAppleApplication.IntegrationEvents;
 using Zaaby.DDD.Abstractions.Application;
 
 namespace IAppleApplication

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,6 +6,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AppleDomain\AppleDomain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="1.60.1" />
+      <PackageReference Include="Zaabee.Mongo.Abstractions" Version="1.3.0" />
+      <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.4.2" />
     </ItemGroup>
 
 </Project>

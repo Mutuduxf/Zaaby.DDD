@@ -20,8 +20,6 @@ namespace AppleApplication
         {
             var i = GetHashCode();
             var i1 = _appleRepository.GetHashCode();
-            var i2 = _appleDomainService.AppleRepository.GetHashCode();
-            var i3 = i1 == i2;
         }
     }
 }

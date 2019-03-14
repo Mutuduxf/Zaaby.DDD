@@ -6,6 +6,7 @@ namespace AppleDomain.IRepositories
 {
     public interface IAppleRepository : IRepository<Apple, Guid>
     {
-
+        int AddRdb(Apple apple);
+        void AddMongo(Apple apple);
     }
 }
