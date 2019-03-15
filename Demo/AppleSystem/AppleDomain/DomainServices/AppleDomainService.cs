@@ -25,9 +25,15 @@ namespace AppleDomain.DomainServices
             var i = _appleRepository.GetHashCode();
         }
 
-        public int AddApple(List<Apple> apples)
+        public int AddRdbApple(List<Apple> apples)
         {
             apples.ForEach(apple => _appleRepository.AddRdb(apple));
+            return apples.Count;
+        }
+
+        public int AddMongoApple(List<Apple> apples)
+        {
+            apples.ForEach(apple => _appleRepository.AddMongo(apple));
             return apples.Count;
         }
     }

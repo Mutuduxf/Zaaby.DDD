@@ -1,4 +1,3 @@
-using IAppleApplication.IntegrationEvents;
 using Zaaby.DDD.Abstractions.Application;
 
 namespace IAppleApplication
@@ -7,5 +6,7 @@ namespace IAppleApplication
     {
         void DomainEventTest();
         void IntegrationEventTest();
+        int AddRdbApple(int quantity);
+        int AddMongoApple(int quantity);
     }
 }

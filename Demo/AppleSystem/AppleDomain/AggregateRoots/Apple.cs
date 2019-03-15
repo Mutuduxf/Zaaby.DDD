@@ -7,7 +7,7 @@ namespace AppleDomain.AggregateRoots
     public class Apple : IAggregateRootWithGuidKey
     {
         public Guid Id { get; protected set; }
-        
+
         public int WeightByGram => Flesh.WeightByGram + 1;
 
         public bool CanBeEat => Skin.Color == AppleSkin.AppleColor.Red;
@@ -62,29 +62,29 @@ namespace AppleDomain.AggregateRoots
                     throw new ArgumentOutOfRangeException();
             }
         }
+    }
 
-        public class AppleSkin
+    public class AppleSkin
+    {
+        public Guid Id { get; set; }
+        public AppleColor Color { get; set; }
+
+        public enum AppleColor
         {
-            public Guid Id { get; set; }
-            public AppleColor Color { get; set; }
-
-            public enum AppleColor
-            {
-                Green,
-                Yellow,
-                Red
-            }
+            Green,
+            Yellow,
+            Red
         }
+    }
 
-        public class AppleFlesh
-        {
-            public Guid Id { get; set; }
-            public int WeightByGram { get; set; }
-        }
+    public class AppleFlesh
+    {
+        public Guid Id { get; set; }
+        public int WeightByGram { get; set; }
+    }
 
-        public class AppleCore
-        {
-            public Guid Id { get; set; }
-        }
+    public class AppleCore
+    {
+        public Guid Id { get; set; }
     }
 }
