@@ -2,7 +2,12 @@
 
 namespace Zaaby.DDD.Abstractions.Domain
 {
-    public interface IAggregateRoot<out TId> : IEntity<TId>
+    public interface IAggregateRoot : IEntity
+    {
+        
+    }
+
+    public interface IAggregateRoot<out TId> : IAggregateRoot, IEntity<TId>
     {
     }
 

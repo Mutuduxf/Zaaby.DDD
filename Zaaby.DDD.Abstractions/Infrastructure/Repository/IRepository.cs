@@ -2,7 +2,11 @@
 
 namespace Zaaby.DDD.Abstractions.Infrastructure.Repository
 {
-    public interface IRepository<TAggregateRoot, TId> where TAggregateRoot : IAggregateRoot<TId>
+    public interface IRepository
+    {
+    }
+
+    public interface IRepository<TAggregateRoot> : IRepository where TAggregateRoot : IAggregateRoot
     {
     }
 }

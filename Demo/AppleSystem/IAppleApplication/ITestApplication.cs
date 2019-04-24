@@ -6,5 +6,7 @@ namespace IAppleApplication
     {
         void DomainEventTest();
         void IntegrationEventTest();
+        int AddRdbApple(int quantity);
+        int AddMongoApple(int quantity);
     }
 }
