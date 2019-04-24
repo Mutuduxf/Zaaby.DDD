@@ -93,7 +93,7 @@ namespace Zaaby.DDD
             return UseRepository(zaabyServer, type => type.GetInterfaces().Any(@interface =>
                 @interface.IsGenericType &&
                 @interface.GetGenericTypeDefinition() ==
-                typeof(IRepository<,>)));
+                typeof(IRepository)));
         }
 
         public static IZaabyServer UseRepository(this IZaabyServer zaabyServer,

@@ -1,5 +1,5 @@
 using System;
-using AppleDomain.AggregateRoots;
+using AppleDomain.Aggregates.Entities;
 
 namespace AppleRepository.POs
 {
@@ -7,6 +7,6 @@ namespace AppleRepository.POs
     {
         public Guid Id { get; set; }
         public Guid AppleId { get; set; }
-        public AppleSkin.AppleColor Color { get; set; }
+        public AppleSkinState.AppleColor Color { get; set; }
     }
 }

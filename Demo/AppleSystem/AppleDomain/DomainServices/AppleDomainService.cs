@@ -1,5 +1,7 @@
 using System.Collections.Generic;
-using AppleDomain.AggregateRoots;
+using System.Linq;
+using AppleDomain.Aggregates;
+using AppleDomain.Aggregates.Entities;
 using AppleDomain.DomainEvents;
 using AppleDomain.IRepositories;
 using Zaaby.DDD.Abstractions.Domain;

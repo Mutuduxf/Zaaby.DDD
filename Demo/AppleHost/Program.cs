@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Configuration;
-using MySql.Data.MySqlClient;
 using Npgsql;
 using Zaabee.Dapper.UnitOfWork;
 using Zaabee.Dapper.UnitOfWork.Abstractions;
@@ -9,7 +8,7 @@ using Zaabee.Mongo.Abstractions;
 using Zaabee.RabbitMQ;
 using Zaabee.RabbitMQ.Abstractions;
 using Zaabee.RabbitMQ.Jil;
-using Zaabee.Redis;
+using Zaabee.Redis; 
 using Zaabee.Redis.Abstractions;
 using Zaaby;
 using Zaaby.DDD;

@@ -1,5 +1,5 @@
 using System.Linq;
-using AppleDomain.AggregateRoots;
+using AppleDomain.Aggregates;
 using AppleDomain.DomainServices;
 using IAppleApplication;
 using IAppleApplication.IntegrationEvents;
