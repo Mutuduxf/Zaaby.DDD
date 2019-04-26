@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Zaaby.DDD.Abstractions.Domain
 {
-    public interface IValueObject : IEqualityComparer<IValueObject>
+    public interface IValueObject<in T> : IEqualityComparer<T>
     {
 
     }
