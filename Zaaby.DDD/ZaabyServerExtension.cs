@@ -34,8 +34,8 @@ namespace Zaaby.DDD
         {
             var applicationServiceTypes = AllTypes
                 .Where(applicationServiceTypeDefinition).ToList();
-            applicationServiceTypes.ForEach(integrationEventSubscriberType =>
-                zaabyServer.AddScoped(integrationEventSubscriberType));
+            applicationServiceTypes.ForEach(applicationServiceType =>
+                zaabyServer.AddScoped(applicationServiceType));
             return zaabyServer;
         }
 
@@ -65,8 +65,8 @@ namespace Zaaby.DDD
         {
             var domainServiceTypes = AllTypes
                 .Where(domainServiceTypeDefinition).ToList();
-            domainServiceTypes.ForEach(integrationEventSubscriberType =>
-                zaabyServer.AddScoped(integrationEventSubscriberType));
+            domainServiceTypes.ForEach(domainServiceType =>
+                zaabyServer.AddScoped(domainServiceType));
             return zaabyServer;
         }
 
@@ -90,17 +90,14 @@ namespace Zaaby.DDD
 
         public static IZaabyServer UseRepository(this IZaabyServer zaabyServer)
         {
-            return UseRepository(zaabyServer, type => type.GetInterfaces().Any(@interface =>
-                @interface.IsGenericType &&
-                @interface.GetGenericTypeDefinition() ==
-                typeof(IRepository)));
+            return UseRepository(zaabyServer,
+                type => type.IsInterface && typeof(IRepository).IsAssignableFrom(type) && type != typeof(IRepository));
         }
 
         public static IZaabyServer UseRepository(this IZaabyServer zaabyServer,
             Func<Type, bool> repositoryTypeDefinition)
         {
-            var repositoryInterfaces =
-                AllTypes.Where(type => type.IsInterface && repositoryTypeDefinition.Invoke(type));
+            var repositoryInterfaces = AllTypes.Where(repositoryTypeDefinition);
 
             var implementRepositories = AllTypes
                 .Where(type => type.IsClass && repositoryInterfaces.Any(i => i.IsAssignableFrom(type)))
@@ -110,7 +107,7 @@ namespace Zaaby.DDD
                 zaabyServer.AddScoped(repository.GetInterfaces().First(i => repositoryInterfaces.Contains(i)),
                     repository));
 
-            var repositories = AllTypes.Where(type=>type.IsClass && repositoryTypeDefinition.Invoke(type)).ToList();
+            var repositories = AllTypes.Where(type => type.IsClass && repositoryTypeDefinition.Invoke(type)).ToList();
 
             repositories.ForEach(repository => zaabyServer.AddScoped(repository));
 
