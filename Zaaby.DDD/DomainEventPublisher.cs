@@ -38,7 +38,7 @@ namespace Zaaby.DDD
             _domainEventHandlerProvider.SubscriberResolves.Clear();
         }
 
-        public void PublishEvent<T>(T domainEvent) where T : IDomainEvent
+        public void Publish<T>(T domainEvent) where T : IDomainEvent
         {
             var type = typeof(T);
             if (!_domainEventHandlerProvider.SubscriberResolves.ContainsKey(type)) return;

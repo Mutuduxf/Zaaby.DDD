@@ -1,12 +1,7 @@
-﻿using System;
-using Zaaby.DDD.Abstractions.Application;
-
-namespace Zaaby.DDD.Abstractions.Infrastructure.EventBus
+﻿namespace Zaaby.DDD.Abstractions.Infrastructure.EventBus
 {
-    public interface IIntegrationEventBus
+    public interface IIntegrationEventBus : IIntegrationEventPublisher, IIntegrationEventSubscriber
     {
-        void PublishEvent<T>(T @event) where T : IIntegrationEvent;
 
-        void SubscribeEvent<T>(Action<T> handle) where T : IIntegrationEvent;
     }
 }

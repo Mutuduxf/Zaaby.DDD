@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleDomain", "Demo\AppleSy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleRepository", "Demo\AppleSystem\AppleRepository\AppleRepository.csproj", "{12877158-2DFE-4C43-83FF-5BCE9B918119}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaaby.DDD.EventBus", "Zaaby.DDD.EventBus\Zaaby.DDD.EventBus.csproj", "{331BCED6-A759-44CC-8DB5-541EC9D8F5C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{12877158-2DFE-4C43-83FF-5BCE9B918119}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12877158-2DFE-4C43-83FF-5BCE9B918119}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12877158-2DFE-4C43-83FF-5BCE9B918119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331BCED6-A759-44CC-8DB5-541EC9D8F5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331BCED6-A759-44CC-8DB5-541EC9D8F5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331BCED6-A759-44CC-8DB5-541EC9D8F5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331BCED6-A759-44CC-8DB5-541EC9D8F5C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

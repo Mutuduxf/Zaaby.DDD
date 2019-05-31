@@ -6,7 +6,7 @@ namespace Zaaby.DDD.Abstractions.Infrastructure.Repository
     {
     }
 
-    public interface IRepository<TAggregateRoot> : IRepository where TAggregateRoot : IAggregateRoot
+    public interface IRepository<in TAggregateRoot> : IRepository where TAggregateRoot : IAggregateRoot
     {
     }
 }

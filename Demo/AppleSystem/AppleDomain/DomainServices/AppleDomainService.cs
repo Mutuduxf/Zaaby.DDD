@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using AppleDomain.Aggregates;
-using AppleDomain.Aggregates.Entities;
 using AppleDomain.DomainEvents;
 using AppleDomain.IRepositories;
 using Zaaby.DDD.Abstractions.Domain;
@@ -22,8 +20,8 @@ namespace AppleDomain.DomainServices
 
         public void PublishDomainEventTest()
         {
-            _domainEventPublisher.PublishEvent(new AppleDomainEventA());
-            _domainEventPublisher.PublishEvent(new AppleDomainEventB());
+            _domainEventPublisher.Publish(new AppleDomainEventA());
+            _domainEventPublisher.Publish(new AppleDomainEventB());
             var i = _appleRepository.GetHashCode();
         }
 

@@ -10,10 +10,9 @@
 
     <ItemGroup>
       <PackageReference Include="Dapper" Version="1.60.6" />
-      <PackageReference Include="Zaabee.Dapper.UnitOfWork.Abstractions" Version="1.0.2" />
       <PackageReference Include="Zaabee.Mongo.Abstractions" Version="1.3.0" />
-      <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.4.2" />
       <PackageReference Include="Zaabee.SequentialGuid" Version="1.0.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="1.0.0" />
     </ItemGroup>
 
 </Project>

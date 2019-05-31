@@ -25,12 +25,12 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
             RegisterIntegrationEventSubscriber();
         }
 
-        public void PublishEvent<T>(T @event) where T : IIntegrationEvent
+        public void Publish<T>(T @event) where T : IIntegrationEvent
         {
             _rabbitMqClient.PublishEvent(GetTypeName(typeof(T)), @event);
         }
 
-        public void SubscribeEvent<T>(Action<T> handle) where T : IIntegrationEvent
+        public void Subscribe<T>(Func<Action<T>> handle) where T : IIntegrationEvent
         {
             _rabbitMqClient.SubscribeEvent(handle);
         }

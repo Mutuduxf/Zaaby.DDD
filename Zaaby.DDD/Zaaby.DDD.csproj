@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.1.9</PackageVersion>
-    <Version>0.1.9</Version>
+    <PackageVersion>0.2.0</PackageVersion>
+    <Version>0.2.0</Version>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageTags>Zaaby DDD</PackageTags>
@@ -12,7 +12,8 @@
     <PackageLicenseUrl>https://github.com/Mutuduxf/Zaaby.DDD/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Zaaby.Abstractions" Version="0.7.0" />
-    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.2.3" />
+    <PackageReference Include="Zaabee.SequentialGuid" Version="1.0.0" />
+    <PackageReference Include="Zaaby.Abstractions" Version="0.8.7" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.2.6" />
   </ItemGroup>
 </Project>

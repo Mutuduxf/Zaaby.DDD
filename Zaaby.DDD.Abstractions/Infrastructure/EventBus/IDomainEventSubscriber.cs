@@ -2,8 +2,8 @@ using Zaaby.DDD.Abstractions.Domain;
 
 namespace Zaaby.DDD.Abstractions.Infrastructure.EventBus
 {
-    public interface IDomainEventPublisher
+    public interface IDomainEventSubscriber
     {
-        void Publish<T>(T @event) where T : IDomainEvent;
+        void Subscriber<T>(T @event) where T : IDomainEvent;
     }
 }
