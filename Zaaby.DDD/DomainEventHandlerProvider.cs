@@ -12,10 +12,7 @@ namespace Zaaby.DDD
         internal readonly ConcurrentDictionary<Type, List<MethodInfo>>
             SubscriberResolves = new ConcurrentDictionary<Type, List<MethodInfo>>();
 
-        public DomainEventHandlerProvider()
-        {
-            RegisterDomainEventHandler();
-        }
+        public DomainEventHandlerProvider() => RegisterDomainEventHandler();
 
         internal void Register<TDomainEvent, THandler>()
             where TDomainEvent : IDomainEvent

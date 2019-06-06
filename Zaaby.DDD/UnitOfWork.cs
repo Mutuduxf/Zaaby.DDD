@@ -19,10 +19,7 @@ namespace Zaaby.DDD
             Connection = connection;
         }
 
-        public void Begin()
-        {
-            Transaction = Connection.BeginTransaction();
-        }
+        public void Begin() => Transaction = Connection.BeginTransaction();
 
         public void Commit()
         {

@@ -18,25 +18,16 @@ namespace Zaaby.DDD
 
         public void Subscribe<TDomainEvent, THandler>()
             where TDomainEvent : IDomainEvent
-            where THandler : IDomainEventHandler<TDomainEvent>
-        {
+            where THandler : IDomainEventHandler<TDomainEvent> =>
             _domainEventHandlerProvider.Register<TDomainEvent, THandler>();
-        }
 
-        public void Subscribe<TDomainEvent>(Type handlerType) where TDomainEvent : IDomainEvent
-        {
+        public void Subscribe<TDomainEvent>(Type handlerType) where TDomainEvent : IDomainEvent =>
             _domainEventHandlerProvider.Register<TDomainEvent>(handlerType);
-        }
 
-        public void Subscribe(Type domainEventType, Type handlerType)
-        {
+        public void Subscribe(Type domainEventType, Type handlerType) =>
             _domainEventHandlerProvider.Register(domainEventType, handlerType);
-        }
 
-        public void Reset()
-        {
-            _domainEventHandlerProvider.SubscriberResolves.Clear();
-        }
+        public void Reset() => _domainEventHandlerProvider.SubscriberResolves.Clear();
 
         public void Publish<T>(T domainEvent) where T : IDomainEvent
         {
