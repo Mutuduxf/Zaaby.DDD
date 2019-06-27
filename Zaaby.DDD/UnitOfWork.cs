@@ -19,7 +19,13 @@ namespace Zaaby.DDD
             Connection = connection;
         }
 
-        public void Begin() => Transaction = Connection.BeginTransaction();
+        public void Begin()
+        {
+            if (Connection == null || Connection.State == ConnectionState.Broken ||
+                Connection.State == ConnectionState.Closed) return;
+            Connection.Open();
+            Transaction = Connection.BeginTransaction();
+        }
 
         public void Commit()
         {
