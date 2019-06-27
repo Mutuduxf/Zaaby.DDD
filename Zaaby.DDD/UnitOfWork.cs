@@ -9,7 +9,7 @@ namespace Zaaby.DDD
     {
         public Guid Id { get; }
 
-        public IDbConnection Connection { get; }
+        public IDbConnection Connection { get; private set; }
 
         public IDbTransaction Transaction { get; private set; }
 
@@ -21,8 +21,6 @@ namespace Zaaby.DDD
 
         public void Begin()
         {
-            if (Connection == null || Connection.State == ConnectionState.Broken ||
-                Connection.State == ConnectionState.Closed) return;
             Connection.Open();
             Transaction = Connection.BeginTransaction();
         }
@@ -41,6 +39,8 @@ namespace Zaaby.DDD
 
         public void Dispose()
         {
+            Connection?.Dispose();
+            Connection = null;
             Transaction?.Dispose();
             Transaction = null;
         }
