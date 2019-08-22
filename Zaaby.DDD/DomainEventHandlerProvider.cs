@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Zaaby.Abstractions;
 using Zaaby.DDD.Abstractions.Domain;
 
 namespace Zaaby.DDD
@@ -43,7 +44,7 @@ namespace Zaaby.DDD
         private void RegisterDomainEventHandler()
         {
             var handlerBaseInterface = typeof(IDomainEventHandler);
-            var domainEventHandlerTypes = ZaabyServerExtension.AllTypes
+            var domainEventHandlerTypes = LoadHelper.GetAllTypes()
                 .Where(type => type.IsClass && handlerBaseInterface.IsAssignableFrom(type)).ToList();
 
             domainEventHandlerTypes.ForEach(domainEventHandlerType =>

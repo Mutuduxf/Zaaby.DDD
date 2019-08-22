@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Zaabee.RabbitMQ.Abstractions;
+using Zaaby.Abstractions;
 using Zaaby.DDD.Abstractions.Application;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
@@ -37,10 +38,12 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
 
         private void RegisterIntegrationEventSubscriber()
         {
-            var integrationEventHandlerTypes = ZaabyServerExtension.AllTypes
+            var allTypes = LoadHelper.GetAllTypes();
+
+            var integrationEventHandlerTypes = allTypes
                 .Where(type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type)).ToList();
 
-            var integrationEventTypes = ZaabyServerExtension.AllTypes
+            var integrationEventTypes = allTypes
                 .Where(type => type.IsClass && typeof(IIntegrationEvent).IsAssignableFrom(type)).ToList();
 
             var rabbitMqClientType = _rabbitMqClient.GetType();

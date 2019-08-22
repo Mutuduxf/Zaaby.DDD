@@ -11,11 +11,10 @@ namespace Zaaby.DDD
 {
     public static class ZaabyServerExtension
     {
-        internal static List<Type> AllTypes;
+        private static readonly IList<Type> AllTypes = LoadHelper.GetAllTypes();
 
         public static IZaabyServer UseDDD(this IZaabyServer zaabyServer)
         {
-            AllTypes = zaabyServer.AllTypes;
             return zaabyServer.UseApplicationService()
                 .UseIntegrationEventHandler()
                 .UseDomainService()
