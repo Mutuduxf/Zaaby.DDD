@@ -2,25 +2,24 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Zaaby.DDD.EventBus.RabbitMQ\Zaaby.DDD.EventBus.RabbitMQ.csproj" />
       <ProjectReference Include="..\..\Zaaby.DDD\Zaaby.DDD.csproj" />
       <ProjectReference Include="..\AppleSystem\AppleApplication\AppleApplication.csproj" />
       <ProjectReference Include="..\AppleSystem\AppleRepository\AppleRepository.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MySql.Data" Version="8.0.17" />
-      <PackageReference Include="Npgsql" Version="4.0.9" />
-      <PackageReference Include="Zaabee.Mongo" Version="1.6.4" />
-      <PackageReference Include="Zaabee.RabbitMQ" Version="1.4.0" />
-      <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.0.6" />
-      <PackageReference Include="Zaabee.StackExchangeRedis" Version="1.0.2" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Protobuf" Version="1.0.2" />
-      <PackageReference Include="Zaaby" Version="0.8.0" />
+      <PackageReference Include="MySql.Data" Version="8.0.18" />
+      <PackageReference Include="Npgsql" Version="4.1.1" />
+      <PackageReference Include="Zaabee.Mongo" Version="1.7.6" />
+      <PackageReference Include="Zaabee.RabbitMQ" Version="1.7.1" />
+      <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.2.1" />
+      <PackageReference Include="Zaabee.StackExchangeRedis" Version="1.2.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Protobuf" Version="1.2.0" />
+      <PackageReference Include="Zaaby" Version="0.11.1" />
     </ItemGroup>
 
     <ItemGroup>

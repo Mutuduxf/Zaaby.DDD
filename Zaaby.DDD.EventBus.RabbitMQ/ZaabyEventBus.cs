@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Zaabee.RabbitMQ.Abstractions;
 using Zaaby.Abstractions;
@@ -26,15 +27,14 @@ namespace Zaaby.DDD.EventBus.RabbitMQ
             RegisterIntegrationEventSubscriber();
         }
 
-        public void Publish<T>(T @event) where T : IIntegrationEvent
-        {
+        public void Publish<T>(T @event) where T : IIntegrationEvent =>
             _rabbitMqClient.PublishEvent(GetTypeName(typeof(T)), @event);
-        }
 
-        public void Subscribe<T>(Func<Action<T>> handle) where T : IIntegrationEvent
-        {
+        public Task PublishAsync<T>(T @event) where T : IIntegrationEvent =>
+            _rabbitMqClient.PublishEventAsync(GetTypeName(typeof(T)), @event);
+
+        public void Subscribe<T>(Func<Action<T>> handle) where T : IIntegrationEvent=>
             _rabbitMqClient.SubscribeEvent(handle);
-        }
 
         private void RegisterIntegrationEventSubscriber()
         {

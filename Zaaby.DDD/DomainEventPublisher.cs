@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Zaaby.DDD.Abstractions.Domain;
 using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
@@ -38,6 +39,11 @@ namespace Zaaby.DDD
                 var handler = (IDomainEventHandler) _serviceProvider.GetService(handleMethodType.DeclaringType);
                 handleMethodType.Invoke(handler, new object[] {domainEvent});
             });
+        }
+
+        public Task PublishAsync<T>(T @event) where T : IDomainEvent
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,14 +12,13 @@ namespace AppleApplication
     public class TestApplication : ITestApplication
     {
         private readonly AppleDomainService _appleDomainService;
-        private readonly IIntegrationEventBus _integrationEventBus;
+//        private readonly IIntegrationEventBus _integrationEventBus;
         private readonly IUnitOfWork _unitOfWork;
 
-        public TestApplication(AppleDomainService appleDomainService, IIntegrationEventBus integrationEventBus,
-            IUnitOfWork unitOfWork)
+        public TestApplication(AppleDomainService appleDomainService,IUnitOfWork unitOfWork)
         {
             _appleDomainService = appleDomainService;
-            _integrationEventBus = integrationEventBus;
+//            _integrationEventBus = integrationEventBus;
             _unitOfWork = unitOfWork;
         }
 
@@ -30,16 +29,16 @@ namespace AppleApplication
 
         public void IntegrationEventTest()
         {
-            _integrationEventBus.Publish(new AppleIntegrationEvent());
+//            _integrationEventBus.Publish(new AppleIntegrationEvent());
         }
 
         public int AddRdbApple(int quantity)
         {
-//            _zaabeeDbContext.UnitOfWork.Begin();
-//            var apples = Enumerable.Range(0, quantity)
-//                .Select(p => new Apple(SequentialGuidHelper.GenerateComb())).ToList();
-//            _appleDomainService.AddRdbApple(apples);
-//            _zaabeeDbContext.UnitOfWork.Commit();
+            _unitOfWork.Begin();
+            var apples = Enumerable.Range(0, quantity)
+                .Select(p => new Apple(SequentialGuidHelper.GenerateComb())).ToList();
+            _appleDomainService.AddRdbApple(apples);
+            _unitOfWork.Commit();
             return quantity;
         }
 

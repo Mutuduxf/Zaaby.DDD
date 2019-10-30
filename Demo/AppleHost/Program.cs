@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Data;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Zaabee.Mongo;
@@ -11,7 +12,7 @@ using Zaabee.StackExchangeRedis.Abstractions;
 using Zaaby;
 using Zaaby.DDD;
 using Zaaby.DDD.Abstractions.Application;
-using Zaaby.DDD.EventBus.RabbitMQ;
+using Zaaby.DDD.Abstractions.Infrastructure;
 
 namespace AppleHost
 {
@@ -31,7 +32,6 @@ namespace AppleHost
             ZaabyServer.GetInstance()
                 .UseDDD()
                 .UseZaabyServer<IApplicationService>()
-                .UseEventBus()
                 //RabbitMq
                 .AddSingleton<IZaabeeRabbitMqClient>(p =>
                     new ZaabeeRabbitMqClient(rabbitMqConfig, new Serializer()))
@@ -40,11 +40,14 @@ namespace AppleHost
                     new ZaabeeRedisClient(redisConfig, new Zaabee.StackExchangeRedis.Protobuf.Serializer()))
                 //Mongo的客户端以及Query客户端
                 .AddSingleton<IZaabeeMongoClient>(p =>
-                    new ZaabeeMongoClient("mongodb://TestUser:123@192.168.78.152:27017/TestDB/?readPreference=primary",
+                    new ZaabeeMongoClient("mongodb://TestUser:123@192.168.78.140:27017/TestDB/?readPreference=primary",
                         "TestDB"))
                 .AddSingleton<IZaabeeMongoQueryClient>(p =>
-                    new ZaabeeMongoClient("mongodb://TestUser:123@192.168.78.152:27017/TestDB/?readPreference=primary",
+                    new ZaabeeMongoClient("mongodb://TestUser:123@192.168.78.140:27017/TestDB/?readPreference=primary",
                         "TestDB"))
+                .AddScoped<IUnitOfWork>(p =>
+                    new UnitOfWork(new NpgsqlConnection(
+                        "Host=192.168.78.140;Username=postgres;Password=123qweasd,./;Database=postgres")))
                 //RDB，均使用IDbConnection注入，两者只选其一
 //                .AddScoped<IZaabeeDbContext>(p => new ZaabeeDbContext(new NpgsqlConnection(
 //                    "Host=192.168.78.152;Username=postgres;Password=123qweasd,./;Database=postgres")))

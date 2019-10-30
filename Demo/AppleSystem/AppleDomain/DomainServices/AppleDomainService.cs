@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AppleDomain.Aggregates;
 using AppleDomain.DomainEvents;
 using AppleDomain.IRepositories;
@@ -18,10 +19,10 @@ namespace AppleDomain.DomainServices
             _appleRepository = appleRepository;
         }
 
-        public void PublishDomainEventTest()
+        public async Task PublishDomainEventTest()
         {
             _domainEventPublisher.Publish(new AppleDomainEventA());
-            _domainEventPublisher.Publish(new AppleDomainEventB());
+            await _domainEventPublisher.PublishAsync(new AppleDomainEventB());
             var i = _appleRepository.GetHashCode();
         }
 
