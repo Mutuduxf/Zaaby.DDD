@@ -11,7 +11,7 @@
 
     <ItemGroup>
       <PackageReference Include="Zaabee.SequentialGuid" Version="1.0.0" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="1.2.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="1.2.1" />
     </ItemGroup>
 
 </Project>

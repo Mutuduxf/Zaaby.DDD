@@ -13,13 +13,13 @@
 
     <ItemGroup>
       <PackageReference Include="MySql.Data" Version="8.0.18" />
-      <PackageReference Include="Npgsql" Version="4.1.1" />
-      <PackageReference Include="Zaabee.Mongo" Version="1.7.6" />
+      <PackageReference Include="Npgsql" Version="4.1.2" />
+      <PackageReference Include="Zaabee.Mongo" Version="1.7.9" />
       <PackageReference Include="Zaabee.RabbitMQ" Version="1.7.1" />
-      <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.2.1" />
-      <PackageReference Include="Zaabee.StackExchangeRedis" Version="1.2.0" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Protobuf" Version="1.2.0" />
-      <PackageReference Include="Zaaby" Version="0.11.1" />
+      <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.2.3" />
+      <PackageReference Include="Zaabee.StackExchangeRedis" Version="1.2.1" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Protobuf" Version="1.2.3" />
+      <PackageReference Include="Zaaby" Version="0.11.2" />
     </ItemGroup>
 
     <ItemGroup>

@@ -3,19 +3,19 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.0.3</PackageVersion>
-        <Version>0.0.3</Version>
+        <PackageVersion>0.0.4</PackageVersion>
+        <Version>0.0.4</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaaby DDD</PackageTags>
         <Description>EventBus for Zaaby.DDD framework.</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaaby.DDD</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/Mutuduxf/Zaaby.DDD/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Zaaby.Abstractions" Version="0.9.1" />
-      <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.4.1" />
+      <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.4.2" />
     </ItemGroup>
 
 </Project>

@@ -8,9 +8,7 @@ namespace Zaaby.DDD
     public class UnitOfWork : IUnitOfWork
     {
         public Guid Id { get; }
-
-        public IDbConnection Connection { get; private set; }
-
+        public IDbConnection Connection { get; }
         public IDbTransaction Transaction { get; private set; }
 
         public UnitOfWork(IDbConnection connection)
@@ -27,22 +25,31 @@ namespace Zaaby.DDD
 
         public void Commit()
         {
-            Transaction.Commit();
-            Dispose();
+            try
+            {
+                Transaction.Commit();
+            }
+            catch
+            {
+                Transaction.Rollback();
+                throw;
+            }
+            finally
+            {
+                Transaction.Dispose();
+            }
         }
 
         public void Rollback()
         {
             Transaction.Rollback();
-            Dispose();
+            Transaction.Dispose();
         }
 
         public void Dispose()
         {
-            Connection?.Dispose();
-            Connection = null;
             Transaction?.Dispose();
-            Transaction = null;
+            Connection?.Dispose();
         }
     }
 }
