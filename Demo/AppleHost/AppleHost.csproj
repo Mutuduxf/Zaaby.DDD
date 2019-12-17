@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,7 +19,7 @@
       <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="1.2.3" />
       <PackageReference Include="Zaabee.StackExchangeRedis" Version="1.2.1" />
       <PackageReference Include="Zaabee.StackExchangeRedis.Protobuf" Version="1.2.3" />
-      <PackageReference Include="Zaaby" Version="0.11.2" />
+      <PackageReference Include="Zaaby" Version="0.11.3" />
     </ItemGroup>
 
     <ItemGroup>
