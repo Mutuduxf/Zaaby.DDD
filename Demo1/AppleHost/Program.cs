@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.IO;
+﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Zaabee.Mongo;
