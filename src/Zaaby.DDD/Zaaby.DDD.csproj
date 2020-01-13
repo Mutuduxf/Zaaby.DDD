@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageVersion>0.2.9</PackageVersion>
+    <Version>0.2.9</Version>
+    <Authors>Mutuduxf</Authors>
+    <Company>Mutuduxf</Company>
+    <PackageTags>Zaaby DDD</PackageTags>
+    <Description>DDD framework for Zaaby.</Description>
+    <PackageProjectUrl>https://github.com/Mutuduxf/Zaaby.DDD</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Zaabee.SequentialGuid" Version="1.0.1" />
+    <PackageReference Include="Zaaby.Abstractions" Version="0.9.1" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="0.4.2" />
+  </ItemGroup>
+</Project>
