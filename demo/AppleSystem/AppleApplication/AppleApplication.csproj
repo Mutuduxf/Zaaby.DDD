@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.SequentialGuid" Version="1.0.1" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2.0.0" />
+      <PackageReference Include="Zaabee.SequentialGuid" Version="2020.1.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2020.1.0" />
     </ItemGroup>
 
 </Project>
