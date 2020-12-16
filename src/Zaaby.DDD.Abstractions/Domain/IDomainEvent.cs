@@ -4,35 +4,8 @@
     {
     }
 
-    public interface IDomainEvent<out T> : IDomainEvent, IEntity<T>
+    public interface IDomainEvent<out T> : IDomainEvent, IValueObject
     {
-    }
-
-    /// <summary>
-    /// Marker interface for entities with <see cref="T:System.Guid" /> keys
-    /// </summary>
-    public interface IDomainEventWithGuidKey : IDomainEvent, IEntityWithGuidKey
-    {
-    }
-
-    /// <summary>
-    /// Marker interface for entities with <see cref="T:System.String" /> keys
-    /// </summary>
-    public interface IDomainEventWithStringKey : IDomainEvent, IEntityWithStringKey
-    {
-    }
-
-    /// <summary>
-    /// Marker interface for entities with <see cref="T:System.Int32" /> keys
-    /// </summary>
-    public interface IDomainEventWithIntKey : IDomainEvent, IEntityWithIntKey
-    {
-    }
-
-    /// <summary>
-    /// Marker interface for entities with <see cref="T:System.Int64" /> keys
-    /// </summary>
-    public interface IDomainEventWithLongKey : IDomainEvent, IEntityWithLongKey
-    {
+        T Id { get; }
     }
 }

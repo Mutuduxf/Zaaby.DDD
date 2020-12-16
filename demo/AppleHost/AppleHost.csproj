@@ -13,7 +13,7 @@
 
     <ItemGroup>
       <PackageReference Include="MySql.Data" Version="8.0.22" />
-      <PackageReference Include="Npgsql" Version="5.0.0" />
+      <PackageReference Include="Npgsql" Version="5.0.1.1" />
       <PackageReference Include="Zaabee.Mongo" Version="2020.5.0" />
       <PackageReference Include="Zaabee.RabbitMQ" Version="2020.1.3" />
       <PackageReference Include="Zaabee.RabbitMQ.Jil" Version="2020.7.0" />

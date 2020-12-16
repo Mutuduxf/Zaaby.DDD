@@ -83,5 +83,10 @@ namespace AppleRepository.Repositories
                 .ToList();
             return (applePo, appleSkin, appleFlesh, appleCores);
         }
+
+        public void Add(Apple aggregateRoot)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

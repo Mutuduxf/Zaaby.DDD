@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageVersion>0.2.3</PackageVersion>
     <Version>0.2.3</Version>
@@ -15,6 +15,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Zaabee.RabbitMQ.Abstractions" Version="2020.1.0" />
     <PackageReference Include="Zaaby.Abstractions" Version="2020.1.0" />
-    <PackageReference Include="Zaaby.DDD.Abstractions" Version="2020.2.0" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="2020.3.0" />
   </ItemGroup>
 </Project>

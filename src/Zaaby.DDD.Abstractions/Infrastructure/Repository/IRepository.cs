@@ -7,23 +7,25 @@ namespace Zaaby.DDD.Abstractions.Infrastructure.Repository
     {
     }
 
-    public interface IRepository<TAggregateRoot> : IRepository where TAggregateRoot : IAggregateRoot
+    public interface IRepository<in TAggregateRoot> : IRepository where TAggregateRoot : IAggregateRoot
     {
+        void Add(TAggregateRoot aggregateRoot);
+    }
+
+    public interface IRepositoryAsync<in TAggregateRoot> : IRepository where TAggregateRoot : IAggregateRoot
+    {
+        Task AddAsync(TAggregateRoot aggregateRoot);
     }
 
     public interface IRepository<TAggregateRoot, in TId> : IRepository<TAggregateRoot>
         where TAggregateRoot : IAggregateRoot<TId>
     {
-        void Add(TAggregateRoot aggregateRoot);
-        void Remove(TAggregateRoot aggregateRoot);
         TAggregateRoot Get(TId id);
     }
 
-    public interface IRepositoryAsync<TAggregateRoot, in TId> : IRepository<TAggregateRoot>
+    public interface IRepositoryAsync<TAggregateRoot, in TId> : IRepositoryAsync<TAggregateRoot>
         where TAggregateRoot : IAggregateRoot<TId>
     {
-        Task AddAsync(TAggregateRoot aggregateRoot);
-        Task RemoveAsync(TAggregateRoot aggregateRoot);
         Task<TAggregateRoot> GetAsync(TId id);
     }
 }

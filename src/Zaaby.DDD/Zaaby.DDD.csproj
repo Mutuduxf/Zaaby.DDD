@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>2020.1.0</PackageVersion>
-    <Version>2020.1.0</Version>
+    <PackageVersion>2020.2.0</PackageVersion>
+    <Version>2020.2.0</Version>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageTags>Zaaby DDD</PackageTags>
@@ -15,6 +15,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Zaabee.SequentialGuid" Version="2020.1.0" />
     <PackageReference Include="Zaaby.Abstractions" Version="2020.1.0" />
-    <PackageReference Include="Zaaby.DDD.Abstractions" Version="2020.2.0" />
+    <PackageReference Include="Zaaby.DDD.Abstractions" Version="2020.3.0" />
   </ItemGroup>
 </Project>
