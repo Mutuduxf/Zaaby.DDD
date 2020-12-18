@@ -4,8 +4,8 @@
     {
     }
 
-    public interface IDomainEvent<out T> : IDomainEvent, IValueObject
+    public interface IDomainEvent<out TId> : IDomainEvent, IValueObject
     {
-        T Id { get; }
+        TId Id { get; }
     }
 }

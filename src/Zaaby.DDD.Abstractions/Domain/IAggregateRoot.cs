@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Zaaby.DDD.Abstractions.Domain
 {
     public interface IAggregateRoot : IEntity
     {
-        
+        IList<IDomainEvent> DomainEvents { get; }
     }
 
     public interface IAggregateRoot<out TId> : IAggregateRoot, IEntity<TId>
