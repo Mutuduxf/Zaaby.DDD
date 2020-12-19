@@ -26,7 +26,7 @@ namespace Zaaby.DDD
         {
             var interfaceType = typeof(IApplicationService);
             return UseApplicationService(zaabyServer,
-                type => type.IsInterface && interfaceType.IsAssignableFrom(type) && type != interfaceType);
+                type => type.IsInterface && interfaceType.IsAssignableFrom(type));
         }
 
         public static IZaabyServer UseApplicationService(this IZaabyServer zaabyServer,
@@ -38,13 +38,13 @@ namespace Zaaby.DDD
                 type.IsClass && applicationServiceInterfaces.Any(i => i.IsAssignableFrom(type))).ToList();
 
             applicationServiceTypes.ForEach(applicationServiceType =>
-                zaabyServer.AddScoped(
-                    applicationServiceType.GetInterfaces().First(i => applicationServiceInterfaces.Contains(i)),
-                    applicationServiceType));
-
-            var applicationServices =
-                AllTypes.Where(type => type.IsClass && applicationServiceTypeDefinition.Invoke(type)).ToList();
-            applicationServices.ForEach(applicationService => zaabyServer.AddScoped(applicationService));
+                {
+                    zaabyServer.AddScoped(applicationServiceType);
+                    zaabyServer.AddScoped(
+                        applicationServiceType.GetInterfaces().First(i => applicationServiceInterfaces.Contains(i)),
+                        applicationServiceType);
+                }
+            );
 
             return zaabyServer;
         }
@@ -91,7 +91,7 @@ namespace Zaaby.DDD
         {
             var interfaceType = typeof(IRepository);
             return UseRepository(zaabyServer,
-                type => type.IsInterface && interfaceType.IsAssignableFrom(type) && type != interfaceType);
+                type => type.IsInterface && interfaceType.IsAssignableFrom(type));
         }
 
         public static IZaabyServer UseRepository(this IZaabyServer zaabyServer,
@@ -104,11 +104,12 @@ namespace Zaaby.DDD
                 .ToList();
 
             repositoryTypes.ForEach(repositoryType =>
-                zaabyServer.AddScoped(repositoryType.GetInterfaces().First(i => repositoryInterfaces.Contains(i)),
-                    repositoryType));
-
-            var repositories = AllTypes.Where(type => type.IsClass && repositoryTypeDefinition.Invoke(type)).ToList();
-            repositories.ForEach(repository => zaabyServer.AddScoped(repository));
+                {
+                    zaabyServer.AddScoped(repositoryType);
+                    zaabyServer.AddScoped(repositoryType.GetInterfaces().First(i => repositoryInterfaces.Contains(i)),
+                        repositoryType);
+                }
+            );
 
             return zaabyServer;
         }

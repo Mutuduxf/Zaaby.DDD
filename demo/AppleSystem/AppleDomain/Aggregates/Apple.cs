@@ -5,7 +5,7 @@ using Zaaby.DDD.Abstractions.Domain;
 
 namespace AppleDomain.Aggregates
 {
-    public class Apple : IAggregateRootWithGuidKey
+    public class Apple : AggregateRootWithGuidKey
     {
         private readonly AppleState _state;
 

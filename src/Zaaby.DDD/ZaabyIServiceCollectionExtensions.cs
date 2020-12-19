@@ -27,7 +27,7 @@ namespace Zaaby.DDD
         {
             var interfaceType = typeof(IApplicationService);
             return UseApplicationService(serviceCollection,
-                type => type.IsInterface && interfaceType.IsAssignableFrom(type) && type != interfaceType);
+                type => type.IsInterface && interfaceType.IsAssignableFrom(type));
         }
 
         public static IServiceCollection UseApplicationService(this IServiceCollection serviceCollection,
@@ -39,13 +39,13 @@ namespace Zaaby.DDD
                 type.IsClass && applicationServiceInterfaces.Any(i => i.IsAssignableFrom(type))).ToList();
 
             applicationServiceTypes.ForEach(applicationServiceType =>
-                serviceCollection.AddScoped(
-                    applicationServiceType.GetInterfaces().First(i => applicationServiceInterfaces.Contains(i)),
-                    applicationServiceType));
-
-            var applicationServices =
-                AllTypes.Where(type => type.IsClass && applicationServiceTypeDefinition.Invoke(type)).ToList();
-            applicationServices.ForEach(applicationService => serviceCollection.AddScoped(applicationService));
+                {
+                    serviceCollection.AddScoped(applicationServiceType);
+                    serviceCollection.AddScoped(
+                        applicationServiceType.GetInterfaces().First(i => applicationServiceInterfaces.Contains(i)),
+                        applicationServiceType);
+                }
+            );
 
             return serviceCollection;
         }
@@ -92,7 +92,7 @@ namespace Zaaby.DDD
         {
             var interfaceType = typeof(IRepository);
             return UseRepository(serviceCollection,
-                type => type.IsInterface && interfaceType.IsAssignableFrom(type) && type != interfaceType);
+                type => type.IsInterface && interfaceType.IsAssignableFrom(type));
         }
 
         public static IServiceCollection UseRepository(this IServiceCollection serviceCollection,
@@ -105,11 +105,13 @@ namespace Zaaby.DDD
                 .ToList();
 
             repositoryTypes.ForEach(repositoryType =>
-                serviceCollection.AddScoped(repositoryType.GetInterfaces().First(i => repositoryInterfaces.Contains(i)),
-                    repositoryType));
-
-            var repositories = AllTypes.Where(type => type.IsClass && repositoryTypeDefinition.Invoke(type)).ToList();
-            repositories.ForEach(repository => serviceCollection.AddScoped(repository));
+                {
+                    serviceCollection.AddScoped(repositoryType);
+                    serviceCollection.AddScoped(
+                        repositoryType.GetInterfaces().First(i => repositoryInterfaces.Contains(i)),
+                        repositoryType);
+                }
+            );
 
             return serviceCollection;
         }
