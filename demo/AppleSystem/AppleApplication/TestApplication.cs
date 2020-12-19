@@ -4,7 +4,7 @@ using AppleDomain.DomainServices;
 using IAppleApplication;
 // using IAppleApplication.IntegrationEvents;
 using Zaabee.SequentialGuid;
-using Zaaby.DDD.Abstractions.Infrastructure;
+using Zaaby.DDD;
 // using Zaaby.DDD.Abstractions.Infrastructure.EventBus;
 
 namespace AppleApplication
@@ -13,9 +13,9 @@ namespace AppleApplication
     {
         private readonly AppleDomainService _appleDomainService;
 //        private readonly IIntegrationEventBus _integrationEventBus;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly UnitOfWork _unitOfWork;
 
-        public TestApplication(AppleDomainService appleDomainService,IUnitOfWork unitOfWork)
+        public TestApplication(AppleDomainService appleDomainService,UnitOfWork unitOfWork)
         {
             _appleDomainService = appleDomainService;
 //            _integrationEventBus = integrationEventBus;

@@ -9,7 +9,7 @@ using AppleRepository.POs;
 using Dapper;
 using Zaabee.Mongo.Abstractions;
 using Zaabee.SequentialGuid;
-using Zaaby.DDD.Abstractions.Infrastructure;
+using Zaaby.DDD;
 
 namespace AppleRepository.Repositories
 {
@@ -19,7 +19,7 @@ namespace AppleRepository.Repositories
         private readonly IDbTransaction _transaction;
         private readonly IZaabeeMongoClient _zaabeeMongoClient;
 
-        public AppleRdbRepository(IUnitOfWork unitOfWork, IZaabeeMongoClient zaabeeMongoClient)
+        public AppleRdbRepository(UnitOfWork unitOfWork, IZaabeeMongoClient zaabeeMongoClient)
         {
             _connection = unitOfWork.Connection;
             _transaction = unitOfWork.Transaction;

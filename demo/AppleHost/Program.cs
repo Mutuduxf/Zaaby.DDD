@@ -44,7 +44,7 @@ namespace AppleHost
                 .AddSingleton<IZaabeeMongoQueryClient>(p =>
                     new ZaabeeMongoClient("mongodb://TestUser:123@192.168.78.140:27017/TestDB/?readPreference=primary",
                         "TestDB"))
-                // .AddScoped<IUnitOfWork>(p =>
+                // .AddScoped<UnitOfWork>(p =>
                 //     new UnitOfWork(new NpgsqlConnection(
                 //         "Host=192.168.78.140;Username=postgres;Password=123qweasd,./;Database=postgres")))
                 //RDB，均使用IDbConnection注入，两者只选其一
