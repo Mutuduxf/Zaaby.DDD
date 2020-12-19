@@ -2,7 +2,6 @@ using System;
 
 namespace AppleDomain.Aggregates.Entities
 {
-
     public class AppleFlesh
     {
         private readonly AppleFleshState _state;
@@ -26,7 +25,7 @@ namespace AppleDomain.Aggregates.Entities
 
         public int WeightIncrease(int weight)
         {
-            return WeightByGram = WeightByGram + weight;
+            return WeightByGram += weight;
         }
     }
 
