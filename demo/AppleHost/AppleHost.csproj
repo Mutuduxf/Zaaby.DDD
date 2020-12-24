@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Zaaby.DDD\Zaaby.DDD.csproj" />
       <ProjectReference Include="..\AppleSystem\AppleApplication\AppleApplication.csproj" />
       <ProjectReference Include="..\AppleSystem\AppleRepository\AppleRepository.csproj" />
     </ItemGroup>

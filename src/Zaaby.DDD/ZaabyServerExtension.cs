@@ -13,47 +13,47 @@ namespace Zaaby.DDD
     {
         private static readonly IList<Type> AllTypes = LoadHelper.GetAllTypes();
 
-        public static IZaabyServer UseDDD(this IZaabyServer zaabyServer)
+        public static IZaabyServer AddDDD(this IZaabyServer zaabyServer)
         {
-            return zaabyServer.UseApplicationService()
-                .UseIntegrationEventHandler()
-                .UseDomainService()
-                .UseDomainEventHandler()
-                .UseRepository();
+            return zaabyServer.AddApplicationService()
+                .AddIntegrationEventHandler()
+                .AddDomainService()
+                .AddDomainEventHandler()
+                .AddRepository();
         }
 
-        public static IZaabyServer UseApplicationService(this IZaabyServer zaabyServer)
+        public static IZaabyServer AddApplicationService(this IZaabyServer zaabyServer)
         {
             var interfaceType = typeof(IApplicationService);
-            return UseApplicationService(zaabyServer,
+            return AddApplicationService(zaabyServer,
                 type => type.IsInterface && interfaceType.IsAssignableFrom(type));
         }
 
-        public static IZaabyServer UseApplicationService(this IZaabyServer zaabyServer,
+        public static IZaabyServer AddApplicationService(this IZaabyServer zaabyServer,
             Func<Type, bool> applicationServiceTypeDefinition)
         {
             var applicationServiceInterfaces = AllTypes.Where(applicationServiceTypeDefinition);
 
             var applicationServiceTypes = AllTypes.Where(type =>
-                type.IsClass && applicationServiceInterfaces.Any(i => i.IsAssignableFrom(type))).ToList();
-
-            applicationServiceTypes.ForEach(applicationServiceType =>
-                {
-                    zaabyServer.AddScoped(applicationServiceType);
-                    zaabyServer.AddScoped(
-                        applicationServiceType.GetInterfaces().First(i => applicationServiceInterfaces.Contains(i)),
-                        applicationServiceType);
-                }
-            );
-
+                type.IsClass && applicationServiceInterfaces.Any(i => i.IsAssignableFrom(type)));
+            
+            foreach (var applicationServiceType in applicationServiceTypes)
+            {
+                var interfaceTypes = applicationServiceType.GetInterfaces()
+                    .Where(applicationServiceTypeDefinition);
+                foreach (var interfaceType in interfaceTypes)
+                    zaabyServer.AddScoped(interfaceType, applicationServiceType);
+                zaabyServer.AddScoped(applicationServiceType);
+            }
+            
             return zaabyServer;
         }
 
-        public static IZaabyServer UseIntegrationEventHandler(this IZaabyServer zaabyServer) =>
-            UseIntegrationEventHandler(zaabyServer,
+        public static IZaabyServer AddIntegrationEventHandler(this IZaabyServer zaabyServer) =>
+            AddIntegrationEventHandler(zaabyServer,
                 type => type.IsClass && typeof(IIntegrationEventHandler).IsAssignableFrom(type));
 
-        public static IZaabyServer UseIntegrationEventHandler(this IZaabyServer zaabyServer,
+        public static IZaabyServer AddIntegrationEventHandler(this IZaabyServer zaabyServer,
             Func<Type, bool> integrationEventHandlerTypeDefinition)
         {
             var integrationEventSubscriberTypes = AllTypes.Where(integrationEventHandlerTypeDefinition).ToList();
@@ -62,10 +62,10 @@ namespace Zaaby.DDD
             return zaabyServer;
         }
 
-        public static IZaabyServer UseDomainService(this IZaabyServer zaabyServer) =>
-            UseDomainService(zaabyServer,type => type.IsClass && typeof(IDomainService).IsAssignableFrom(type));
+        public static IZaabyServer AddDomainService(this IZaabyServer zaabyServer) =>
+            AddDomainService(zaabyServer,type => type.IsClass && typeof(IDomainService).IsAssignableFrom(type));
 
-        public static IZaabyServer UseDomainService(this IZaabyServer zaabyServer,
+        public static IZaabyServer AddDomainService(this IZaabyServer zaabyServer,
             Func<Type, bool> domainServiceTypeDefinition)
         {
             var domainServiceTypes = AllTypes.Where(domainServiceTypeDefinition).ToList();
@@ -73,10 +73,10 @@ namespace Zaaby.DDD
             return zaabyServer;
         }
 
-        public static IZaabyServer UseDomainEventHandler(this IZaabyServer zaabyServer)=>UseDomainEventHandler(zaabyServer,
+        public static IZaabyServer AddDomainEventHandler(this IZaabyServer zaabyServer)=>AddDomainEventHandler(zaabyServer,
             type => type.IsClass && typeof(IDomainEventHandler).IsAssignableFrom(type));
 
-        public static IZaabyServer UseDomainEventHandler(this IZaabyServer zaabyServer,
+        public static IZaabyServer AddDomainEventHandler(this IZaabyServer zaabyServer,
             Func<Type, bool> domainEventHandlerDefinition)
         {
             var domainEventSubscriberTypes = AllTypes.Where(domainEventHandlerDefinition).ToList();
@@ -87,29 +87,29 @@ namespace Zaaby.DDD
             return zaabyServer;
         }
 
-        public static IZaabyServer UseRepository(this IZaabyServer zaabyServer)
+        public static IZaabyServer AddRepository(this IZaabyServer zaabyServer)
         {
             var interfaceType = typeof(IRepository);
-            return UseRepository(zaabyServer,
+            return AddRepository(zaabyServer,
                 type => type.IsInterface && interfaceType.IsAssignableFrom(type));
         }
 
-        public static IZaabyServer UseRepository(this IZaabyServer zaabyServer,
+        public static IZaabyServer AddRepository(this IZaabyServer zaabyServer,
             Func<Type, bool> repositoryTypeDefinition)
         {
             var repositoryInterfaces = AllTypes.Where(repositoryTypeDefinition);
 
             var repositoryTypes = AllTypes
-                .Where(type => type.IsClass && repositoryInterfaces.Any(i => i.IsAssignableFrom(type)))
-                .ToList();
+                .Where(type => type.IsClass && repositoryInterfaces.Any(i => i.IsAssignableFrom(type)));
 
-            repositoryTypes.ForEach(repositoryType =>
-                {
-                    zaabyServer.AddScoped(repositoryType);
-                    zaabyServer.AddScoped(repositoryType.GetInterfaces().First(i => repositoryInterfaces.Contains(i)),
-                        repositoryType);
-                }
-            );
+            foreach (var repositoryType in repositoryTypes)
+            {
+                var interfaceTypes = repositoryType.GetInterfaces()
+                    .Where(repositoryTypeDefinition);
+                foreach (var interfaceType in interfaceTypes)
+                    zaabyServer.AddScoped(interfaceType, repositoryType);
+                zaabyServer.AddScoped(repositoryType);
+            }
 
             return zaabyServer;
         }
